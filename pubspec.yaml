@@ -1,7 +1,7 @@
 name: dvm
-description: A sample command-line application.
+description: A simple CLI to manage Dart SDK versions.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/blendfactory/dvm
 
 environment:
   sdk: ^3.2.3
