@@ -129,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
-  lints:
-    dependency: "direct dev"
-    description:
-      name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   logging:
     dependency: transitive
     description:
@@ -369,5 +361,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  yumemi_lints:
+    dependency: "direct dev"
+    description:
+      name: yumemi_lints
+      sha256: e1b31a16af21eb4df8440887780d6b224d43e3f9fc98fe659b9d731384f04431
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
 sdks:
   dart: ">=3.2.3 <4.0.0"
