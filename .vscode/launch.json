@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug",
+      "request": "launch",
+      "type": "dart",
+      "program": "bin/dvm.dart",
+      "args": [
+        "--define=DEBUG=true",
+      ],
+    },
+    {
+      "name": "release",
+      "request": "launch",
+      "type": "dart",
+      "program": "bin/dvm.dart",
+      "args": [],
+    },
+  ],
+}
