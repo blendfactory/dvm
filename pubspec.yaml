@@ -7,6 +7,7 @@ environment:
   sdk: ^3.2.3
 
 dependencies:
+  args: ^2.4.2
   collection: ^1.18.0
   file: ^7.0.0
   pub_semver: ^2.1.4
