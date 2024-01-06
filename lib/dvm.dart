@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dvm/src/data/exit_status.dart';
+import 'package:dvm/src/app/models/exit_status.dart';
 
 int calculate() {
   return 6 * 7;
