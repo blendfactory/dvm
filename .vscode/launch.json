@@ -1,5 +1,18 @@
 {
   "version": "0.2.0",
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "commands",
+      "description": "Select a command to run",
+      "options": [
+        "releases",
+        "install",
+        "use",
+        "dart",
+      ],
+    },
+  ],
   "configurations": [
     {
       "name": "debug",
@@ -9,13 +22,18 @@
       "toolArgs": [
         "--define=DEBUG=true",
       ],
+      "args": [
+        "${input:commands}",
+      ],
     },
     {
       "name": "release",
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "args": [],
+      "args": [
+        "${input:commands}",
+      ],
     },
   ],
 }
