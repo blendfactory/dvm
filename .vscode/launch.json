@@ -6,7 +6,7 @@
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "args": [
+      "toolArgs": [
         "--define=DEBUG=true",
       ],
     },
