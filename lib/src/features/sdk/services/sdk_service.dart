@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dvm/src/cores/network/dvm_client.dart';
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sdk_service.g.dart';
@@ -35,13 +36,13 @@ final class SdkService {
     final responseBody = await _dvmClient.read(url);
     final json = jsonDecode(responseBody);
     if (json is! Map<String, dynamic>) {
-      throw FormatException(
+      throw ClientException(
         'The type of `json` should be `Map<String, dynamic>`.',
       );
     }
     final prefixes = json['prefixes'];
     if (prefixes is! List<dynamic>) {
-      throw FormatException(
+      throw ClientException(
         'The type of `prefixes` should be `List<dynamic>`.',
       );
     }
@@ -49,7 +50,7 @@ final class SdkService {
     final versions = prefixes
         .map((prefix) {
           if (prefix is! String) {
-            throw FormatException(
+            throw ClientException(
               'The type of `prefix` should be `String`.',
             );
           }
