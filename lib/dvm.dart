@@ -1,18 +1,2 @@
-import 'dart:io';
-
-import 'package:dvm/src/app/models/exit_status.dart';
-
-int calculate() {
-  return 6 * 7;
-}
-
-extension FlushThenExit on ExitStatus {
-  Future<void> flushThenExit() async => Future.wait(
-        [
-          stdout.close(),
-          stderr.close(),
-        ],
-      ).then(
-        (_) => exit(code),
-      );
-}
+export 'package:dvm/src/app/command_runner.dart';
+export 'package:dvm/src/app/models/exit_status.dart';
