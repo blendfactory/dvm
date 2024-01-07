@@ -6,6 +6,7 @@
       "id": "commands",
       "description": "Select a command to run",
       "options": [
+        "--version",
         "releases",
         "install",
         "use",
