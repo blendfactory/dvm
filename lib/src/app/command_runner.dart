@@ -1,5 +1,6 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+import 'package:dvm/src/app/commands/releases_command.dart';
 import 'package:dvm/src/app/gen/cli_info.g.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 
@@ -15,6 +16,7 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
       help: 'Print this cli version.',
       negatable: false,
     );
+    addCommand(ReleasesCommand());
   }
 
   @override
