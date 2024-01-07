@@ -112,4 +112,10 @@ sealed class SdkVersion {
         }(),
     };
   }
+
+  SdkChannel get channel => switch (this) {
+        final _StableSdkVersion _ => SdkChannel.stable,
+        final _BetaSdkVersion _ => SdkChannel.beta,
+        final _DevSdkVersion _ => SdkChannel.dev,
+      };
 }
