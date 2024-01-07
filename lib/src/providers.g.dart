@@ -34,7 +34,7 @@ final fileSystemProvider = AutoDisposeProvider<FileSystem>.internal(
 );
 
 typedef FileSystemRef = AutoDisposeProviderRef<FileSystem>;
-String _$projectConfigDirHash() => r'936571d38fb17364f66bf6a6ffc384614f069c26';
+String _$projectConfigDirHash() => r'd143a8ed63309067ae05682d58d2369a9d0e03bd';
 
 /// See also [projectConfigDir].
 @ProviderFor(projectConfigDir)
