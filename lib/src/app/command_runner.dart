@@ -1,8 +1,8 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_util/cli_logging.dart';
-import 'package:dvm/src/app/commands/releases_command.dart';
 import 'package:dvm/src/app/app_container.dart';
+import 'package:dvm/src/app/commands/releases_command.dart';
 import 'package:dvm/src/app/gen/cli_info.g.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 import 'package:dvm/src/app/servicies/console_service.dart';
@@ -27,7 +27,8 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
     addCommand(ReleasesCommand());
   }
 
-  ConsoleService get _consoleService => appContainer.read(consoleServiceProvider);
+  ConsoleService get _consoleService =>
+      appContainer.read(consoleServiceProvider);
 
   @override
   Future<ExitStatus> run(Iterable<String> args) async {
