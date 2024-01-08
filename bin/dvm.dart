@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dvm/dvm.dart';
 
 Future<void> main(List<String> args) async {
-  final commandRunner = DvmCommandRunner();
+  final commandRunner = AppCommandRunner();
   final exitStatus = await commandRunner.run(args);
   await exitStatus.flushThenExit();
 }

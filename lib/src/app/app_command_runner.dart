@@ -7,8 +7,8 @@ import 'package:dvm/src/app/gen/cli_info.g.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 import 'package:dvm/src/app/servicies/console_service.dart';
 
-final class DvmCommandRunner extends CommandRunner<ExitStatus> {
-  DvmCommandRunner()
+final class AppCommandRunner extends CommandRunner<ExitStatus> {
+  AppCommandRunner()
       : super(
           cliInfo.name,
           cliInfo.description,
