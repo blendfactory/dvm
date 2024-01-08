@@ -1,14 +1,15 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+import 'package:cli_util/cli_logging.dart';
 import 'package:dvm/src/app/commands/releases_command.dart';
+import 'package:dvm/src/app/app_container.dart';
 import 'package:dvm/src/app/gen/cli_info.g.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 import 'package:dvm/src/app/servicies/console_service.dart';
 
 final class DvmCommandRunner extends CommandRunner<ExitStatus> {
-  DvmCommandRunner([
-    this._consoleService = const ConsoleService(),
-  ]) : super(
+  DvmCommandRunner()
+      : super(
           cliInfo.name,
           cliInfo.description,
         ) {
@@ -18,10 +19,15 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
       help: 'Print this cli version.',
       negatable: false,
     );
+    argParser.addFlag(
+      'verbose',
+      help: 'Print verbose output.',
+      negatable: false,
+    );
     addCommand(ReleasesCommand());
   }
 
-  final ConsoleService _consoleService;
+  ConsoleService get _consoleService => appContainer.read(consoleServiceProvider);
 
   @override
   Future<ExitStatus> run(Iterable<String> args) async {
@@ -30,6 +36,13 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
       if (argResults.existsVersionFlag) {
         _printCliVersion();
         return ExitStatus.success;
+      }
+      if (argResults.existsVerboseFlag) {
+        appContainer.updateOverrides(
+          [
+            loggerProvider.overrideWithValue(Logger.verbose()),
+          ],
+        );
       }
       return await runCommand(argResults) ?? ExitStatus.success;
     } on UsageException catch (e) {
@@ -62,6 +75,8 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
   }
 }
 
-extension _ExistsVersionFlag on ArgResults {
+extension _ExistsFlag on ArgResults {
   bool get existsVersionFlag => wasParsed('version');
+
+  bool get existsVerboseFlag => wasParsed('verbose');
 }

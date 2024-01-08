@@ -1,8 +1,8 @@
 import 'package:args/command_runner.dart';
+import 'package:dvm/src/app/app_container.dart';
 import 'package:dvm/src/app/command_services/releases_command_services.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
-import 'package:riverpod/riverpod.dart';
 
 class ReleasesCommand extends Command<ExitStatus> {
   ReleasesCommand() {
@@ -25,9 +25,8 @@ class ReleasesCommand extends Command<ExitStatus> {
     final channel = argResults!['channel'] as String;
     final sdkChannel = SdkChannel.values.byName(channel);
 
-    final container = ProviderContainer();
     final releasesCommandService =
-        container.read(releasesCommandServiceProvider);
+        appContainer.read(releasesCommandServiceProvider);
 
     return releasesCommandService.call(channel: sdkChannel);
   }
