@@ -28,7 +28,7 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
     try {
       final argResults = parse(args);
       if (argResults.existsVersionFlag) {
-        print(cliInfo.version);
+        _printCliVersion();
         return ExitStatus.success;
       }
       return await runCommand(argResults) ?? ExitStatus.success;
@@ -39,6 +39,12 @@ final class DvmCommandRunner extends CommandRunner<ExitStatus> {
       _printException(e);
       return ExitStatus.error;
     }
+  }
+
+  void _printCliVersion() {
+    _consoleService.spacer();
+    _consoleService.info(cliInfo.version);
+    _consoleService.spacer();
   }
 
   void _printUsageException(UsageException e) {
