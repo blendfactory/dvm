@@ -15,11 +15,15 @@ final class ReleasesCommand extends AppCommand {
       defaultsTo: SdkChannel.stable.name,
     );
   }
+
   @override
   final name = 'releases';
 
   @override
   final description = 'Show available Dart SDK releases.';
+
+  @override
+  List<String> get aliases => ['r'];
 
   @override
   Future<ExitStatus> run() async {
