@@ -4,7 +4,7 @@ import 'package:dvm/src/app/command_services/releases_command_services.dart';
 import 'package:dvm/src/app/models/exit_status.dart';
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
 
-class ReleasesCommand extends Command<ExitStatus> {
+final class ReleasesCommand extends Command<ExitStatus> {
   ReleasesCommand() {
     argParser.addOption(
       'channel',
