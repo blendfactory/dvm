@@ -63,13 +63,14 @@ final class InstallCommandService {
       return ExitStatus.success;
     }
 
-    _consoleService.info('Installing $sdkVersion.');
+    final installProgress = _consoleService.progress('Installing $sdkVersion');
     await _sdkService.installSdk(version: sdkVersion);
-    _consoleService.info('Installed $sdkVersion.');
+    installProgress.finish(message: 'Installed $sdkVersion.');
 
-    _consoleService.info('Activating $sdkVersion.');
+    final activateProgress = _consoleService.progress('Activating $sdkVersion');
     await _sdkService.activateSdk(version: sdkVersion);
-    _consoleService.info('Activated $sdkVersion.');
+    activateProgress.finish(message: 'Activated $sdkVersion.');
+
     return ExitStatus.success;
   }
 }

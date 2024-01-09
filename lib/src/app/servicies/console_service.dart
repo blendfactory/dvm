@@ -44,4 +44,6 @@ $message''';
   }
 
   void spacer() => _logger.stdout('');
+
+  Progress progress(String message) => _logger.progress(message);
 }
