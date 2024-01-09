@@ -1,4 +1,5 @@
 import 'package:dvm/src/app/models/exit_status.dart';
+import 'package:dvm/src/app/servicies/abi_service.dart';
 import 'package:dvm/src/app/servicies/console_service.dart';
 import 'package:dvm/src/features/project_config/services/project_config_service.dart';
 import 'package:dvm/src/features/sdk/models/sdk_version.dart';
@@ -12,6 +13,7 @@ part 'install_command_service.g.dart';
     sdkService,
     consoleService,
     projectConfigService,
+    abiService,
   ],
 )
 InstallCommandService installCommandService(
@@ -20,10 +22,12 @@ InstallCommandService installCommandService(
   final sdkService = ref.watch(sdkServiceProvider);
   final consoleService = ref.watch(consoleServiceProvider);
   final projectConfigService = ref.watch(projectConfigServiceProvider);
+  final abiService = ref.watch(abiServiceProvider);
   return InstallCommandService(
     sdkService: sdkService,
     consoleService: consoleService,
     projectConfigService: projectConfigService,
+    abiService: abiService,
   );
 }
 
@@ -32,13 +36,16 @@ final class InstallCommandService {
     required ConsoleService consoleService,
     required SdkService sdkService,
     required ProjectConfigService projectConfigService,
+    required AbiService abiService,
   })  : _consoleService = consoleService,
         _sdkService = sdkService,
-        _projectConfigService = projectConfigService;
+        _projectConfigService = projectConfigService,
+        _abiService = abiService;
 
   final ConsoleService _consoleService;
   final SdkService _sdkService;
   final ProjectConfigService _projectConfigService;
+  final AbiService _abiService;
 
   Future<ExitStatus> call({
     required SdkVersion? version,
@@ -63,9 +70,15 @@ final class InstallCommandService {
       return ExitStatus.success;
     }
 
+    final (os: os, arch: arch) = _abiService.getOsAndArch();
+
     final installProgress = _consoleService.progress('Installing $sdkVersion');
     try {
-      await _sdkService.installSdk(version: sdkVersion);
+      await _sdkService.installSdk(
+        os: os,
+        arch: arch,
+        version: sdkVersion,
+      );
       installProgress.finish(message: 'Installed $sdkVersion.');
     } on Exception catch (e) {
       installProgress.finish(
@@ -73,18 +86,6 @@ final class InstallCommandService {
       );
       return ExitStatus.error;
     }
-
-    final activateProgress = _consoleService.progress('Activating $sdkVersion');
-    try {
-      await _sdkService.activateSdk(version: sdkVersion);
-      activateProgress.finish(message: 'Activated $sdkVersion.');
-    } on Exception catch (e) {
-      activateProgress.finish(
-        message: 'Failed to activate $sdkVersion. error: $e',
-      );
-      return ExitStatus.error;
-    }
-
     return ExitStatus.success;
   }
 }

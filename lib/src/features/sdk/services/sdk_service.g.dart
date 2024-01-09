@@ -25,7 +25,7 @@ final sdkCacheDirProvider = AutoDisposeProvider<Directory>.internal(
 );
 
 typedef SdkCacheDirRef = AutoDisposeProviderRef<Directory>;
-String _$sdkServiceHash() => r'936b59a10e17023280aaf3333c556072c1ee8bfb';
+String _$sdkServiceHash() => r'374da5e1b2761c0c615173ebe3517a63618b4fab';
 
 /// See also [sdkService].
 @ProviderFor(sdkService)
@@ -34,12 +34,21 @@ final sdkServiceProvider = AutoDisposeProvider<SdkService>.internal(
   name: r'sdkServiceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$sdkServiceHash,
-  dependencies: <ProviderOrFamily>[dvmClientProvider, sdkCacheDirProvider],
+  dependencies: <ProviderOrFamily>{
+    dvmClientProvider,
+    sdkCacheDirProvider,
+    systemTempDirProvider,
+    permissionClientProvider
+  },
   allTransitiveDependencies: <ProviderOrFamily>{
     dvmClientProvider,
     ...?dvmClientProvider.allTransitiveDependencies,
     sdkCacheDirProvider,
-    ...?sdkCacheDirProvider.allTransitiveDependencies
+    ...?sdkCacheDirProvider.allTransitiveDependencies,
+    systemTempDirProvider,
+    ...?systemTempDirProvider.allTransitiveDependencies,
+    permissionClientProvider,
+    ...?permissionClientProvider.allTransitiveDependencies
   },
 );
 

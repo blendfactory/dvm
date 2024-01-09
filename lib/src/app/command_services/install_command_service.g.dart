@@ -9,7 +9,7 @@ part of 'install_command_service.dart';
 // **************************************************************************
 
 String _$installCommandServiceHash() =>
-    r'8a859bcecb5040bc567374466a6394cd497a21e4';
+    r'c746cf6b2d029ae82b8f9de5b88900848a5381cd';
 
 /// See also [installCommandService].
 @ProviderFor(installCommandService)
@@ -20,18 +20,21 @@ final installCommandServiceProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$installCommandServiceHash,
-  dependencies: <ProviderOrFamily>[
+  dependencies: <ProviderOrFamily>{
     sdkServiceProvider,
     consoleServiceProvider,
-    projectConfigServiceProvider
-  ],
+    projectConfigServiceProvider,
+    abiServiceProvider
+  },
   allTransitiveDependencies: <ProviderOrFamily>{
     sdkServiceProvider,
     ...?sdkServiceProvider.allTransitiveDependencies,
     consoleServiceProvider,
     ...?consoleServiceProvider.allTransitiveDependencies,
     projectConfigServiceProvider,
-    ...?projectConfigServiceProvider.allTransitiveDependencies
+    ...?projectConfigServiceProvider.allTransitiveDependencies,
+    abiServiceProvider,
+    ...?abiServiceProvider.allTransitiveDependencies
   },
 );
 

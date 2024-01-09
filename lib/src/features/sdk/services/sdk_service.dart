@@ -1,8 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:archive/archive_io.dart';
 import 'package:dvm/src/cores/local/file_system.dart';
+import 'package:dvm/src/cores/local/permission_client.dart';
+import 'package:dvm/src/cores/local/system_temp_dir.dart';
 import 'package:dvm/src/cores/network/dvm_client.dart';
+import 'package:dvm/src/features/sdk/models/architecture.dart';
+import 'package:dvm/src/features/sdk/models/operating_system.dart';
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvm/src/features/sdk/models/sdk_version.dart';
 import 'package:file/file.dart';
@@ -28,14 +33,21 @@ Directory sdkCacheDir(SdkCacheDirRef ref) {
   dependencies: [
     dvmClient,
     sdkCacheDir,
+    systemTempDir,
+    permissionClient,
   ],
 )
 SdkService sdkService(SdkServiceRef ref) {
   final dvmClient = ref.watch(dvmClientProvider);
   final sdkCacheDir = ref.watch(sdkCacheDirProvider);
+  final systemTempDir = ref.watch(systemTempDirProvider);
+  final permissionClient = ref.watch(permissionClientProvider);
   return SdkService(
     dvmClient: dvmClient,
     sdkCacheDir: sdkCacheDir,
+    systemTempDir: systemTempDir,
+    zipDecoder: ZipDecoder(),
+    permissionClient: permissionClient,
   );
 }
 
@@ -43,11 +55,20 @@ final class SdkService {
   SdkService({
     required DvmClient dvmClient,
     required Directory sdkCacheDir,
+    required Directory systemTempDir,
+    required ZipDecoder zipDecoder,
+    required PermissionClient permissionClient,
   })  : _dvmClient = dvmClient,
-        _sdkCacheDir = sdkCacheDir;
+        _sdkCacheDir = sdkCacheDir,
+        _systemTempDir = systemTempDir,
+        _zipDecoder = zipDecoder,
+        _permissionClient = permissionClient;
 
   final DvmClient _dvmClient;
   final Directory _sdkCacheDir;
+  final Directory _systemTempDir;
+  final ZipDecoder _zipDecoder;
+  final PermissionClient _permissionClient;
 
   Future<List<SdkVersion>> getSdkVersions({
     required SdkChannel channel,
@@ -113,10 +134,46 @@ final class SdkService {
   }
 
   Future<void> installSdk({
+    required OperatingSystem os,
+    required Architecture arch,
     required SdkVersion version,
-  }) async {}
+  }) async {
+    if (!_sdkCacheDir.existsSync()) {
+      _sdkCacheDir.createSync(recursive: true);
+    }
 
-  Future<void> activateSdk({
-    required SdkVersion version,
-  }) async {}
+    final url = Uri(
+      scheme: 'https',
+      host: 'storage.googleapis.com',
+      pathSegments: [
+        'dart-archive',
+        'channels',
+        version.channel.name,
+        'release',
+        version.toString(),
+        'sdk',
+        'dartsdk-$os-$arch-release.zip',
+      ],
+    );
+    final responseBodyBytes = await _dvmClient.readBytes(url);
+
+    final archive = _zipDecoder.decodeBytes(responseBodyBytes);
+    extractArchiveToDisk(archive, _systemTempDir.path);
+
+    final sdkDir = _systemTempDir.childDirectory('dart-sdk');
+    if (!sdkDir.existsSync()) {
+      throw Exception('Could not find Dart SDK');
+    }
+
+    final versionCacheDir = _sdkCacheDir.childDirectory(version.toString());
+    sdkDir.renameSync(versionCacheDir.path);
+
+    if (os case OperatingSystem.macos || OperatingSystem.linux) {
+      final dartBin = versionCacheDir.childFile('bin/dart');
+      if (!dartBin.existsSync()) {
+        throw Exception('Could not find Dart SDK');
+      }
+      await _permissionClient.grantExecPermission(dartBin);
+    }
+  }
 }
