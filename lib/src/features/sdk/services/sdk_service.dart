@@ -1,25 +1,53 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:dvm/src/cores/local/file_system.dart';
 import 'package:dvm/src/cores/network/dvm_client.dart';
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:file/file.dart';
 import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sdk_service.g.dart';
 
-@Riverpod(dependencies: [dvmClient])
+@Riverpod(
+  dependencies: [
+    fileSystem,
+  ],
+)
+Directory sdkCacheDir(SdkCacheDirRef ref) {
+  final fileSystem = ref.watch(fileSystemProvider);
+  final userHome = Platform.isWindows
+      ? Platform.environment['USERPROFILE']!
+      : Platform.environment['HOME']!;
+  return fileSystem.directory('$userHome/.dvm/cache/versions');
+}
+
+@Riverpod(
+  dependencies: [
+    dvmClient,
+    sdkCacheDir,
+  ],
+)
 SdkService sdkService(SdkServiceRef ref) {
   final dvmClient = ref.watch(dvmClientProvider);
-  return SdkService(dvmClient: dvmClient);
+  final sdkCacheDir = ref.watch(sdkCacheDirProvider);
+  return SdkService(
+    dvmClient: dvmClient,
+    sdkCacheDir: sdkCacheDir,
+  );
 }
 
 final class SdkService {
   SdkService({
     required DvmClient dvmClient,
-  }) : _dvmClient = dvmClient;
+    required Directory sdkCacheDir,
+  })  : _dvmClient = dvmClient,
+        _sdkCacheDir = sdkCacheDir;
 
   final DvmClient _dvmClient;
+  final Directory _sdkCacheDir;
 
   Future<List<SdkVersion>> getSdkVersions({
     required SdkChannel channel,
@@ -76,4 +104,19 @@ final class SdkService {
         .toList();
     return versions;
   }
+
+  bool exitsSdk({
+    required SdkVersion version,
+  }) {
+    final versionCacheDir = _sdkCacheDir.childDirectory(version.toString());
+    return versionCacheDir.existsSync();
+  }
+
+  Future<void> installSdk({
+    required SdkVersion version,
+  }) async {}
+
+  Future<void> activateSdk({
+    required SdkVersion version,
+  }) async {}
 }

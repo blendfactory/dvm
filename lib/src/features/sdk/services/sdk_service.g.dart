@@ -8,7 +8,24 @@ part of 'sdk_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sdkServiceHash() => r'de084142cc90cc99c4d82b1a62ff6352e6781e60';
+String _$sdkCacheDirHash() => r'e2b68f046bef2ed8b3925627272f12dbafff1b8a';
+
+/// See also [sdkCacheDir].
+@ProviderFor(sdkCacheDir)
+final sdkCacheDirProvider = AutoDisposeProvider<Directory>.internal(
+  sdkCacheDir,
+  name: r'sdkCacheDirProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$sdkCacheDirHash,
+  dependencies: <ProviderOrFamily>[fileSystemProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    fileSystemProvider,
+    ...?fileSystemProvider.allTransitiveDependencies
+  },
+);
+
+typedef SdkCacheDirRef = AutoDisposeProviderRef<Directory>;
+String _$sdkServiceHash() => r'936b59a10e17023280aaf3333c556072c1ee8bfb';
 
 /// See also [sdkService].
 @ProviderFor(sdkService)
@@ -17,10 +34,12 @@ final sdkServiceProvider = AutoDisposeProvider<SdkService>.internal(
   name: r'sdkServiceProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$sdkServiceHash,
-  dependencies: <ProviderOrFamily>[dvmClientProvider],
+  dependencies: <ProviderOrFamily>[dvmClientProvider, sdkCacheDirProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     dvmClientProvider,
-    ...?dvmClientProvider.allTransitiveDependencies
+    ...?dvmClientProvider.allTransitiveDependencies,
+    sdkCacheDirProvider,
+    ...?sdkCacheDirProvider.allTransitiveDependencies
   },
 );
 
