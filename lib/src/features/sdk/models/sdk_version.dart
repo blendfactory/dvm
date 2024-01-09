@@ -16,7 +16,7 @@ part 'sdk_version.part.dart';
 /// the prerelease and prerelease patch versions, and beta or dev is
 /// the channel.
 @immutable
-sealed class SdkVersion {
+sealed class SdkVersion implements Comparable<SdkVersion> {
   const SdkVersion({
     required this.major,
     required this.minor,
@@ -163,6 +163,61 @@ sealed class SdkVersion {
             d.prePatch,
           ),
       };
+
+  @override
+  int compareTo(SdkVersion other) {
+    final majorCompare = major.compareTo(other.major);
+    if (majorCompare != 0) {
+      return majorCompare;
+    }
+
+    final minorCompare = minor.compareTo(other.minor);
+    if (minorCompare != 0) {
+      return minorCompare;
+    }
+
+    final patchCompare = patch.compareTo(other.patch);
+    if (patchCompare != 0) {
+      return patchCompare;
+    }
+
+    return switch (this) {
+      final _StableSdkVersion _ => switch (other) {
+          final _StableSdkVersion _ => 0,
+          final _PreSdkVersion _ => -1,
+        },
+      final _PreSdkVersion p => switch (other) {
+          final _StableSdkVersion _ => 1,
+          final _PreSdkVersion o => () {
+              final preMinorCompare = p.preMinor.compareTo(o.preMinor);
+              if (preMinorCompare != 0) {
+                return preMinorCompare;
+              }
+
+              final prePatchCompare = p.prePatch.compareTo(o.prePatch);
+              if (prePatchCompare != 0) {
+                return prePatchCompare;
+              }
+
+              return switch (p) {
+                final _BetaSdkVersion _ => switch (o) {
+                    final _BetaSdkVersion _ => 0,
+                    final _DevSdkVersion _ => 1,
+                  },
+                final _DevSdkVersion _ => switch (o) {
+                    final _BetaSdkVersion _ => -1,
+                    final _DevSdkVersion _ => 0,
+                  },
+              };
+            }(),
+        },
+    };
+  }
+
+  bool operator <(SdkVersion other) => compareTo(other) < 0;
+  bool operator >(SdkVersion other) => compareTo(other) > 0;
+  bool operator <=(SdkVersion other) => compareTo(other) <= 0;
+  bool operator >=(SdkVersion other) => compareTo(other) >= 0;
 
   SdkChannel get channel => switch (this) {
         final _StableSdkVersion _ => SdkChannel.stable,
