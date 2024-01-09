@@ -38,7 +38,7 @@ final class ReleasesCommandService {
     required SdkChannel channel,
   }) async {
     try {
-      final versions = await _sdkService.getSdkVersions(channel: channel);
+      final versions = await _sdkService.getSdks(channel: channel);
       for (final version in versions) {
         _consoleService.info(version.toString());
       }

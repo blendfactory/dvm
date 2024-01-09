@@ -70,7 +70,7 @@ final class SdkService {
   final ZipDecoder _zipDecoder;
   final PermissionClient _permissionClient;
 
-  Future<List<SdkVersion>> getSdkVersions({
+  Future<List<SdkVersion>> getSdks({
     required SdkChannel channel,
   }) async {
     final url = Uri.https(
