@@ -4,5 +4,5 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'file_system.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 FileSystem fileSystem(FileSystemRef ref) => const LocalFileSystem();

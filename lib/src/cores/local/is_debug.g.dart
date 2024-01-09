@@ -8,7 +8,7 @@ part of 'is_debug.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isDebugHash() => r'7a92ae156ca7e8b040034e6dff853d591c8e5105';
+String _$isDebugHash() => r'825d37122b4c60e6c3e7e2134dd25854b8e59a48';
 
 /// See also [isDebug].
 @ProviderFor(isDebug)
@@ -17,8 +17,8 @@ final isDebugProvider = AutoDisposeProvider<bool>.internal(
   name: r'isDebugProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$isDebugHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef IsDebugRef = AutoDisposeProviderRef<bool>;

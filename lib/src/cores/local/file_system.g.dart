@@ -8,7 +8,7 @@ part of 'file_system.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileSystemHash() => r'81435d2fdc96b2d66ccd223e5877584d6c588cd9';
+String _$fileSystemHash() => r'7720fbe4ecda2c79ec172ed949e755c56e5553e6';
 
 /// See also [fileSystem].
 @ProviderFor(fileSystem)
@@ -17,8 +17,8 @@ final fileSystemProvider = AutoDisposeProvider<FileSystem>.internal(
   name: r'fileSystemProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$fileSystemHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef FileSystemRef = AutoDisposeProviderRef<FileSystem>;
