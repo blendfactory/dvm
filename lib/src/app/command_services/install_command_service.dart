@@ -64,12 +64,26 @@ final class InstallCommandService {
     }
 
     final installProgress = _consoleService.progress('Installing $sdkVersion');
-    await _sdkService.installSdk(version: sdkVersion);
-    installProgress.finish(message: 'Installed $sdkVersion.');
+    try {
+      await _sdkService.installSdk(version: sdkVersion);
+      installProgress.finish(message: 'Installed $sdkVersion.');
+    } on Exception catch (e) {
+      installProgress.finish(
+        message: 'Failed to install $sdkVersion. error: $e',
+      );
+      return ExitStatus.error;
+    }
 
     final activateProgress = _consoleService.progress('Activating $sdkVersion');
-    await _sdkService.activateSdk(version: sdkVersion);
-    activateProgress.finish(message: 'Activated $sdkVersion.');
+    try {
+      await _sdkService.activateSdk(version: sdkVersion);
+      activateProgress.finish(message: 'Activated $sdkVersion.');
+    } on Exception catch (e) {
+      activateProgress.finish(
+        message: 'Failed to activate $sdkVersion. error: $e',
+      );
+      return ExitStatus.error;
+    }
 
     return ExitStatus.success;
   }
