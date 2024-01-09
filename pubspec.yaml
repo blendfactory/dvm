@@ -10,6 +10,7 @@ environment:
   sdk: ^3.2.3
 
 dependencies:
+  archive: ^3.4.10
   args: ^2.4.2
   cli_util: ^0.4.1
   collection: ^1.18.0
