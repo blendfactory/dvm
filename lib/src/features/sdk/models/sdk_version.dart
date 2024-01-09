@@ -1,4 +1,5 @@
 import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
+import 'package:meta/meta.dart';
 
 part 'sdk_version.part.dart';
 
@@ -14,6 +15,7 @@ part 'sdk_version.part.dart';
 /// the hyphen follows the stable version scheme, a and b after the hyphen are
 /// the prerelease and prerelease patch versions, and beta or dev is
 /// the channel.
+@immutable
 sealed class SdkVersion {
   const SdkVersion({
     required this.major,
@@ -112,6 +114,55 @@ sealed class SdkVersion {
         }(),
     };
   }
+
+  @override
+  bool operator ==(Object other) => switch (this) {
+        final _StableSdkVersion s => other is _StableSdkVersion &&
+            s.runtimeType == other.runtimeType &&
+            s.major == other.major &&
+            s.minor == other.minor &&
+            s.patch == other.patch,
+        final _BetaSdkVersion b => other is _BetaSdkVersion &&
+            b.runtimeType == other.runtimeType &&
+            b.major == other.major &&
+            b.minor == other.minor &&
+            b.patch == other.patch &&
+            b.preMinor == other.preMinor &&
+            b.prePatch == other.prePatch,
+        final _DevSdkVersion d => other is _DevSdkVersion &&
+            d.runtimeType == other.runtimeType &&
+            d.major == other.major &&
+            d.minor == other.minor &&
+            d.patch == other.patch &&
+            d.preMinor == other.preMinor &&
+            d.prePatch == other.prePatch,
+      };
+
+  @override
+  int get hashCode => switch (this) {
+        final _StableSdkVersion s => Object.hash(
+            s.runtimeType,
+            s.major,
+            s.minor,
+            s.patch,
+          ),
+        final _BetaSdkVersion b => Object.hash(
+            b.runtimeType,
+            b.major,
+            b.minor,
+            b.patch,
+            b.preMinor,
+            b.prePatch,
+          ),
+        final _DevSdkVersion d => Object.hash(
+            d.runtimeType,
+            d.major,
+            d.minor,
+            d.patch,
+            d.preMinor,
+            d.prePatch,
+          ),
+      };
 
   SdkChannel get channel => switch (this) {
         final _StableSdkVersion _ => SdkChannel.stable,
