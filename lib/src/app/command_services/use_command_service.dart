@@ -69,7 +69,7 @@ final class UseCommandService {
       _consoleService.info('$sdkVersion is not installed.');
 
       final shouldInstall = _consoleService.confirm(
-        'Would you linke to install $sdkVersion?',
+        'Would you like to install $sdkVersion?',
       );
       if (!shouldInstall) {
         return ExitStatus.success;
