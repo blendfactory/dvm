@@ -66,6 +66,15 @@ final class UseCommandService {
 
     final existsSdk = _sdkService.exitsSdk(version: sdkVersion);
     if (!existsSdk) {
+      _consoleService.info('$sdkVersion is not installed.');
+
+      final shouldInstall = _consoleService.confirm(
+        'Would you linke to install $sdkVersion?',
+      );
+      if (!shouldInstall) {
+        return ExitStatus.success;
+      }
+
       final (os: os, arch: arch) = _abiService.getOsAndArch();
 
       final installProgress =

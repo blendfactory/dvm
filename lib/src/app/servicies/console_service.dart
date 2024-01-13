@@ -46,4 +46,13 @@ $message''';
   void spacer() => _logger.info('');
 
   Progress progress(String message) => _logger.progress(message);
+
+  bool confirm(
+    String message, {
+    bool defaultValue = true,
+  }) =>
+      _logger.confirm(
+        message,
+        defaultValue: defaultValue,
+      );
 }
