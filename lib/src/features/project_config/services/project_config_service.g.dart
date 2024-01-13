@@ -29,7 +29,7 @@ final projectConfigDirProvider = AutoDisposeProvider<Directory>.internal(
 
 typedef ProjectConfigDirRef = AutoDisposeProviderRef<Directory>;
 String _$projectConfigServiceHash() =>
-    r'fed2cde06832f67d0aad2b2c5515855c5109f058';
+    r'4fdc5691800200e709ffc436f809371a2d8f4459';
 
 /// See also [projectConfigService].
 @ProviderFor(projectConfigService)
@@ -40,10 +40,15 @@ final projectConfigServiceProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$projectConfigServiceHash,
-  dependencies: <ProviderOrFamily>[projectConfigDirProvider],
+  dependencies: <ProviderOrFamily>[
+    projectConfigDirProvider,
+    sdkCacheDirProvider
+  ],
   allTransitiveDependencies: <ProviderOrFamily>{
     projectConfigDirProvider,
-    ...?projectConfigDirProvider.allTransitiveDependencies
+    ...?projectConfigDirProvider.allTransitiveDependencies,
+    sdkCacheDirProvider,
+    ...?sdkCacheDirProvider.allTransitiveDependencies
   },
 );
 

@@ -94,8 +94,7 @@ final class UseCommandService {
       }
     }
 
-    // TODO: Implement switching sdk version.
-
+    _projectConfigService.updateSdkLink(sdkVersion);
     return ExitStatus.success;
   }
 }
