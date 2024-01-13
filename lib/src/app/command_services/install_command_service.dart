@@ -82,7 +82,7 @@ final class InstallCommandService {
       installProgress.complete('Installed $sdkVersion.');
     } on Exception catch (e) {
       installProgress.fail(
-        'Failed to install $sdkVersion. error: $e',
+        'Failed to install $sdkVersion.\n$e',
       );
       return ExitStatus.error;
     }
