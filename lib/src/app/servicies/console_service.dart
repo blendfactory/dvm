@@ -1,4 +1,4 @@
-import 'package:cli_util/cli_logging.dart';
+import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'console_service.g.dart';
@@ -26,24 +26,24 @@ final class ConsoleService {
 
   final Logger _logger;
 
-  void info(String message) => _logger.stdout(message);
+  void info(String message) => _logger.info(message);
 
-  void warning(String message) {
-    final ansi = _logger.ansi;
-    final coloredMsg = '${ansi.yellow}$message${ansi.none}';
-    _logger.stdout(coloredMsg);
-  }
+  void warning(String message) => _logger.warn(message);
 
   void error(String message) {
+    final issueLink = link(
+      message: 'GitHub Issue',
+      uri: Uri.parse('https://github.com/blendfactory/dvm/issues/new'),
+    );
     final msg = '''
 An unexpected error occurred.
-Consider creating an issue on https://github.com/blendfactory/dvm/issues/new.
+Consider creating an issue on $issueLink.
 
 $message''';
-    _logger.stderr(msg);
+    _logger.err(msg);
   }
 
-  void spacer() => _logger.stdout('');
+  void spacer() => _logger.info('');
 
   Progress progress(String message) => _logger.progress(message);
 }

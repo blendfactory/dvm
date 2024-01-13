@@ -12,11 +12,11 @@ environment:
 dependencies:
   archive: ^3.4.10
   args: ^2.4.2
-  cli_util: ^0.4.1
   collection: ^1.18.0
   file: ^7.0.0
   http: ^1.1.2
   json_annotation: ^4.8.1
+  mason_logger: ^0.2.11
   meta: ^1.11.0
   pub_semver: ^2.1.4
   riverpod: ^2.4.9

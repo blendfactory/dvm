@@ -76,10 +76,10 @@ final class UseCommandService {
           arch: arch,
           version: sdkVersion,
         );
-        installProgress.finish(message: 'Installed $sdkVersion.');
+        installProgress.complete('Installed $sdkVersion.');
       } on Exception catch (e) {
-        installProgress.finish(
-          message: 'Failed to install $sdkVersion. error: $e',
+        installProgress.fail(
+          'Failed to install $sdkVersion. error: $e',
         );
         return ExitStatus.error;
       }
