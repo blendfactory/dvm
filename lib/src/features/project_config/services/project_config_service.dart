@@ -73,7 +73,7 @@ final class ProjectConfigService {
     return projectConfig?.version;
   }
 
-  void updateSdkLink(SdkVersion version) {
+  void updateSettings(SdkVersion version) {
     final sdkLink = _projectConfigDir.childLink('dart_sdk');
     final targetPath = _sdkCacheDir.childDirectory(version.toString()).path;
     if (sdkLink.existsSync()) {

@@ -94,7 +94,20 @@ final class UseCommandService {
       }
     }
 
-    _projectConfigService.updateSdkLink(sdkVersion);
+    final updateSettingsProgress = _consoleService.progress(
+      'Updating settings with Dart SDK version $sdkVersion',
+    );
+    try {
+      _projectConfigService.updateSettings(sdkVersion);
+      updateSettingsProgress.complete(
+        'Updated settings with Dart SDK version $sdkVersion',
+      );
+    } on Exception catch (e) {
+      updateSettingsProgress.fail(
+        'Failed to update settings with Dart SDK version $sdkVersion.\n$e',
+      );
+      return ExitStatus.error;
+    }
     return ExitStatus.success;
   }
 }
