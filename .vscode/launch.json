@@ -13,6 +13,11 @@
         "dart",
       ],
     },
+    {
+      "type": "promptString",
+      "id": "args",
+      "description": "Enter the command arguments",
+    },
   ],
   "configurations": [
     {
@@ -25,6 +30,7 @@
       ],
       "args": [
         "${input:commands}",
+        "${input:args}",
       ],
     },
     {
