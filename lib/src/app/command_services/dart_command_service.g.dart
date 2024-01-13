@@ -9,7 +9,7 @@ part of 'dart_command_service.dart';
 // **************************************************************************
 
 String _$dartCommandServiceHash() =>
-    r'5ad67a6ae48c5529c811a24b5d9ac53a35b1ad15';
+    r'044af67d5e32c615d52857c652bd571bd1569759';
 
 /// See also [dartCommandService].
 @ProviderFor(dartCommandService)
@@ -20,8 +20,19 @@ final dartCommandServiceProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$dartCommandServiceHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
+  dependencies: <ProviderOrFamily>[
+    projectConfigServiceProvider,
+    dartServiceProvider,
+    consoleServiceProvider
+  ],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    projectConfigServiceProvider,
+    ...?projectConfigServiceProvider.allTransitiveDependencies,
+    dartServiceProvider,
+    ...?dartServiceProvider.allTransitiveDependencies,
+    consoleServiceProvider,
+    ...?consoleServiceProvider.allTransitiveDependencies
+  },
 );
 
 typedef DartCommandServiceRef = AutoDisposeProviderRef<DartCommandService>;
