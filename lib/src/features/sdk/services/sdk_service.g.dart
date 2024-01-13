@@ -8,23 +8,6 @@ part of 'sdk_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sdkCacheDirHash() => r'e2b68f046bef2ed8b3925627272f12dbafff1b8a';
-
-/// See also [sdkCacheDir].
-@ProviderFor(sdkCacheDir)
-final sdkCacheDirProvider = AutoDisposeProvider<Directory>.internal(
-  sdkCacheDir,
-  name: r'sdkCacheDirProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$sdkCacheDirHash,
-  dependencies: <ProviderOrFamily>[fileSystemProvider],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    fileSystemProvider,
-    ...?fileSystemProvider.allTransitiveDependencies
-  },
-);
-
-typedef SdkCacheDirRef = AutoDisposeProviderRef<Directory>;
 String _$sdkServiceHash() => r'374da5e1b2761c0c615173ebe3517a63618b4fab';
 
 /// See also [sdkService].

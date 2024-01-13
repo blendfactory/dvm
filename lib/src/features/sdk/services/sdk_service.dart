@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:archive/archive_io.dart';
-import 'package:dvm/src/cores/local/file_system.dart';
 import 'package:dvm/src/cores/local/permission_client.dart';
+import 'package:dvm/src/cores/local/sdk_cache_dir.dart';
 import 'package:dvm/src/cores/local/system_temp_dir.dart';
 import 'package:dvm/src/cores/network/dvm_client.dart';
 import 'package:dvm/src/features/sdk/models/architecture.dart';
@@ -15,19 +14,6 @@ import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sdk_service.g.dart';
-
-@Riverpod(
-  dependencies: [
-    fileSystem,
-  ],
-)
-Directory sdkCacheDir(SdkCacheDirRef ref) {
-  final fileSystem = ref.watch(fileSystemProvider);
-  final userHome = Platform.isWindows
-      ? Platform.environment['USERPROFILE']!
-      : Platform.environment['HOME']!;
-  return fileSystem.directory('$userHome/.dvm/cache/versions');
-}
 
 @Riverpod(
   dependencies: [
