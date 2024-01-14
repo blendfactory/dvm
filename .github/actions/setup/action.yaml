@@ -11,3 +11,4 @@ runs:
 
     - name: Get dependencies
       run: dart pub get
+      shell: bash
