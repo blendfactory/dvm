@@ -4,7 +4,7 @@ version: 0.0.1
 repository: https://github.com/blendfactory/dvm
 
 executables:
-  dvm:
+  dvm: dvm
 
 environment:
   sdk: ^3.2.3
