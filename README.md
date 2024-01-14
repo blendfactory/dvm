@@ -1,6 +1,6 @@
 # DVM
 
-Dart Version Management: A simple CLI to manage Dart SDK versions.
+Dart Version Management: A simple CLI to manage Dart SDK versions per project.
 
 Inspired by [FVM].
 

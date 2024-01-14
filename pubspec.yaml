@@ -1,5 +1,5 @@
 name: dvmx
-description: A simple CLI to manage Dart SDK versions.
+description: "Dart Version Management: A simple CLI to manage Dart SDK versions per project."
 version: 0.0.1
 repository: https://github.com/blendfactory/dvm
 
