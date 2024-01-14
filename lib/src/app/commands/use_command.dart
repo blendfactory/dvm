@@ -1,8 +1,8 @@
-import 'package:dvm/dvm.dart';
-import 'package:dvm/src/app/app_commnad.dart';
-import 'package:dvm/src/app/app_container.dart';
-import 'package:dvm/src/app/command_services/use_command_service.dart';
-import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/dvmx.dart';
+import 'package:dvmx/src/app/app_commnad.dart';
+import 'package:dvmx/src/app/app_container.dart';
+import 'package:dvmx/src/app/command_services/use_command_service.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 
 final class UseCommand extends AppCommand {
   UseCommand();

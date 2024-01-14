@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-import 'package:dvm/src/app/models/cli_info.dart';
+import 'package:dvmx/src/app/models/cli_info.dart';
 
 const cliInfo = CliInfo(
   name: 'dvm',

@@ -1,4 +1,4 @@
-import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 import 'package:meta/meta.dart';
 
 part 'sdk_version.part.dart';

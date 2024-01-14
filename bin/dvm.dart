@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dvm/dvm.dart';
+import 'package:dvmx/dvmx.dart';
 
 Future<void> main(List<String> args) async {
   final commandRunner = AppCommandRunner();

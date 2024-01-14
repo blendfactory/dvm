@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:dvm/src/cores/local/file_system.dart';
-import 'package:dvm/src/cores/local/is_debug.dart';
-import 'package:dvm/src/cores/local/sdk_cache_dir.dart';
-import 'package:dvm/src/features/project_config/models/project_config.dart';
-import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/src/cores/local/file_system.dart';
+import 'package:dvmx/src/cores/local/is_debug.dart';
+import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
+import 'package:dvmx/src/features/project_config/models/project_config.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 import 'package:file/file.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

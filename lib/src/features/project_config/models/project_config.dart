@@ -1,4 +1,4 @@
-import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'project_config.g.dart';

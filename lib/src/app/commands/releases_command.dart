@@ -1,8 +1,8 @@
-import 'package:dvm/src/app/app_commnad.dart';
-import 'package:dvm/src/app/app_container.dart';
-import 'package:dvm/src/app/command_services/releases_command_services.dart';
-import 'package:dvm/src/app/models/exit_status.dart';
-import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
+import 'package:dvmx/src/app/app_commnad.dart';
+import 'package:dvmx/src/app/app_container.dart';
+import 'package:dvmx/src/app/command_services/releases_command_services.dart';
+import 'package:dvmx/src/app/models/exit_status.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 
 final class ReleasesCommand extends AppCommand {
   ReleasesCommand() {

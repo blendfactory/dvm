@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:archive/archive_io.dart';
-import 'package:dvm/src/cores/local/permission_client.dart';
-import 'package:dvm/src/cores/local/sdk_cache_dir.dart';
-import 'package:dvm/src/cores/local/system_temp_dir.dart';
-import 'package:dvm/src/cores/network/dvm_client.dart';
-import 'package:dvm/src/features/sdk/models/architecture.dart';
-import 'package:dvm/src/features/sdk/models/operating_system.dart';
-import 'package:dvm/src/features/sdk/models/sdk_channel.dart';
-import 'package:dvm/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/src/cores/local/permission_client.dart';
+import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
+import 'package:dvmx/src/cores/local/system_temp_dir.dart';
+import 'package:dvmx/src/cores/network/dvm_client.dart';
+import 'package:dvmx/src/features/sdk/models/architecture.dart';
+import 'package:dvmx/src/features/sdk/models/operating_system.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 import 'package:file/file.dart';
 import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

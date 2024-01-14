@@ -1,6 +1,6 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
-import 'package:dvm/src/app/models/exit_status.dart';
+import 'package:dvmx/src/app/models/exit_status.dart';
 
 abstract class AppCommand extends Command<ExitStatus> {
   @override

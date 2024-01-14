@@ -1,7 +1,7 @@
-import 'package:dvm/src/app/models/exit_status.dart';
-import 'package:dvm/src/app/servicies/console_service.dart';
-import 'package:dvm/src/app/servicies/dart_service.dart';
-import 'package:dvm/src/features/project_config/services/project_config_service.dart';
+import 'package:dvmx/src/app/models/exit_status.dart';
+import 'package:dvmx/src/app/servicies/console_service.dart';
+import 'package:dvmx/src/app/servicies/dart_service.dart';
+import 'package:dvmx/src/features/project_config/services/project_config_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dart_command_service.g.dart';

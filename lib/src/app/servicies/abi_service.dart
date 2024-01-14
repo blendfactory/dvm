@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:dvm/src/features/sdk/models/architecture.dart';
-import 'package:dvm/src/features/sdk/models/operating_system.dart';
+import 'package:dvmx/src/features/sdk/models/architecture.dart';
+import 'package:dvmx/src/features/sdk/models/operating_system.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'abi_service.g.dart';

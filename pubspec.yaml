@@ -1,4 +1,4 @@
-name: dvm
+name: dvmx
 description: A simple CLI to manage Dart SDK versions.
 version: 0.0.1
 repository: https://github.com/blendfactory/dvm
