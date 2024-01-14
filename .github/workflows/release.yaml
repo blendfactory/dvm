@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
-        uses: ./github/actions/setup
+        uses: ./.github/actions/setup
       - name: Create a GitHub release
         run: dart run grinder pkg-github-release
   upload-excutables:
@@ -34,6 +34,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
-        uses: ./github/actions/setup
+        uses: ./.github/actions/setup
       - name: Upload excutables to GitHub
         run: dart run grinder pkg-github-${{ matrix.args.os }}
