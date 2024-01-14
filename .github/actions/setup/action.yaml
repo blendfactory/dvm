@@ -1,0 +1,13 @@
+name: "Setup"
+description: "Set up a Dart project"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Dart
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: 3.2.3
+
+    - name: Get dependencies
+      run: dart pub get
