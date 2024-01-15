@@ -51,7 +51,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/dvm-${{ env.version }}-linux-i32.sha256
+            build/dvm-${{ env.version }}-linux-ia32.sha256
             build/dvm-${{ env.version }}-linux-x64.sha256
             build/dvm-${{ env.version }}-linux-arm.sha256
             build/dvm-${{ env.version }}-linux-arm64.sha256
@@ -69,6 +69,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/dvm-${{ env.version }}-windows-i32.sha256
+            build/dvm-${{ env.version }}-windows-ia32.sha256
             build/dvm-${{ env.version }}-windows-x64.sha256
           tag_name: ${{ env.version }}
