@@ -46,24 +46,24 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dvm-${{ env.version }}-linux-i32.sha256
-            dvm-${{ env.version }}-linux-x64.sha256
-            dvm-${{ env.version }}-linux-arm.sha256
-            dvm-${{ env.version }}-linux-arm64.sha256
+            build/dvm-${{ env.version }}-linux-i32.sha256
+            build/dvm-${{ env.version }}-linux-x64.sha256
+            build/dvm-${{ env.version }}-linux-arm.sha256
+            build/dvm-${{ env.version }}-linux-arm64.sha256
           tag_name: ${{ env.version }}
       - name: Upload macOS checksums to GitHub
         if: matrix.args.os == 'macos'
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dvm-${{ env.version }}-macos-x64.sha256
-            dvm-${{ env.version }}-macos-arm64.sha256
+            build/dvm-${{ env.version }}-macos-x64.sha256
+            build/dvm-${{ env.version }}-macos-arm64.sha256
           tag_name: ${{ env.version }}
       - name: Upload Windows checksums to GitHub
         if: matrix.args.os == 'windows'
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dvm-${{ env.version }}-windows-i32.sha256
-            dvm-${{ env.version }}-windows-x64.sha256
+            build/dvm-${{ env.version }}-windows-i32.sha256
+            build/dvm-${{ env.version }}-windows-x64.sha256
           tag_name: ${{ env.version }}
