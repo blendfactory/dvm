@@ -8,6 +8,11 @@ const _githubUser = 'blendthink';
 const _githubRepo = 'blendfactory/dvm';
 
 Future<void> main(List<String> args) async {
+  if (args.firstOrNull == 'pkg-version') {
+    print(cliInfo.version);
+    return;
+  }
+
   pkg.name.value = cliInfo.name;
   pkg.githubUser.value = _githubUser;
   pkg.githubRepo.value = _githubRepo;
