@@ -39,8 +39,13 @@ jobs:
         run: dart run grinder pkg-github-${{ matrix.args.os }}
       - name: Build checksums
         run: dart run grinder pkg-checksum-${{ matrix.args.os }}
-      - name: Extract version
+      - name: Extract version on non-Windows
+        if: matrix.args.os != 'windows'
         run: echo "version=$(dart run grinder pkg-version)" >> $GITHUB_ENV
+      - name: Extract version on Windows
+        if: matrix.args.os == 'windows'
+        run: |
+          "version=$(dart run grinder pkg-version)" | Out-File -FilePath $env:GITHUB_ENV -Append
       - name: Upload Linux checksums to GitHub
         if: matrix.args.os == 'linux'
         uses: softprops/action-gh-release@v1
@@ -64,6 +69,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/dvm-${{ env.version }}-windows-i32.sha256
-            build/dvm-${{ env.version }}-windows-x64.sha256
-          tag_name: ${{ env.version }}
+            build/dvm-$env:version-windows-i32.sha256
+            build/dvm-$env:version-windows-x64.sha256
+          tag_name: $env:version
