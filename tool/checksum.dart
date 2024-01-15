@@ -18,7 +18,6 @@ void addChecksumTasks() {
         'pkg-checksum-$os-$arch',
         taskFunction: () async => _buildChecksum(os, arch),
         description: 'Build $os $arch checksum.',
-        depends: ['pkg-standalone-$os-$arch'],
       );
     }).toList();
     archTasks.forEach(addTask);
