@@ -69,6 +69,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/dvm-"$env:version"-windows-i32.sha256
-            build/dvm-"$env:version"-windows-x64.sha256
-          tag_name: "$env:version"
+            build/dvm-${{ env.version }}-windows-i32.sha256
+            build/dvm-${{ env.version }}-windows-x64.sha256
+          tag_name: ${{ env.version }}
