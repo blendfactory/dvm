@@ -19,35 +19,21 @@ jobs:
         uses: ./.github/actions/setup
       - name: Create a GitHub release
         run: dart run grinder pkg-github-release
-  upload-excutables:
+  upload-excutables-linux:
     needs: create-release
-    strategy:
-      matrix:
-        args:
-          [
-            { image: ubuntu-latest, os: linux },
-            { image: macos-latest, os: macos },
-            { image: windows-latest, os: windows },
-          ]
-    runs-on: ${{ matrix.args.image }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Upload excutables to GitHub
-        run: dart run grinder pkg-github-${{ matrix.args.os }}
+        run: dart run grinder pkg-github-linux
       - name: Build checksums
-        run: dart run grinder pkg-checksum-${{ matrix.args.os }}
-      - name: Extract version on non-Windows
-        if: matrix.args.os != 'windows'
+        run: dart run grinder pkg-checksum-linux
+      - name: Extract version
         run: echo "version=$(dart run grinder pkg-version)" >> $GITHUB_ENV
-      - name: Extract version on Windows
-        if: matrix.args.os == 'windows'
-        run: |
-          "version=$(dart run grinder pkg-version)" | Out-File -FilePath $env:GITHUB_ENV -Append
-      - name: Upload Linux checksums to GitHub
-        if: matrix.args.os == 'linux'
+      - name: Upload checksums to GitHub
         uses: softprops/action-gh-release@v1
         with:
           files: |
@@ -56,16 +42,49 @@ jobs:
             build/dvm-${{ env.version }}-linux-arm.sha256
             build/dvm-${{ env.version }}-linux-arm64.sha256
           tag_name: ${{ env.version }}
-      - name: Upload macOS checksums to GitHub
-        if: matrix.args.os == 'macos'
+  upload-excutables-macos:
+    needs: create-release
+    strategy:
+      matrix:
+        args:
+          [
+            { image: macos-latest, arch: x64 },
+            { image: macos-latest-xlarge, arch: arm64 },
+          ]
+    runs-on: ${{ matrix.args.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Upload excutables to GitHub
+        run: dart run grinder pkg-github-macos-${{ matrix.args.arch }}
+      - name: Build checksums
+        run: dart run grinder pkg-checksum-macos-${{ matrix.args.arch }}
+      - name: Extract version
+        run: echo "version=$(dart run grinder pkg-version)" >> $GITHUB_ENV
+      - name: Upload checksums to GitHub
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/dvm-${{ env.version }}-macos-x64.sha256
-            build/dvm-${{ env.version }}-macos-arm64.sha256
+            build/dvm-${{ env.version }}-macos-${{ matrix.args.arch }}.sha256
           tag_name: ${{ env.version }}
-      - name: Upload Windows checksums to GitHub
-        if: matrix.args.os == 'windows'
+  upload-excutables-windows:
+    needs: create-release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Upload excutables to GitHub
+        run: dart run grinder pkg-github-windows
+      - name: Build checksums
+        run: dart run grinder pkg-checksum-windows
+      - name: Extract version
+        run: |
+          "version=$(dart run grinder pkg-version)" | Out-File -FilePath $env:GITHUB_ENV -Append
+      - name: Upload checksums to GitHub
         uses: softprops/action-gh-release@v1
         with:
           files: |
