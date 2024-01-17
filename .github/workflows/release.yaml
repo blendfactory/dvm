@@ -123,8 +123,8 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v1
         with:
-          app_id: ${{ secrets.APP_ID_BLENDFACTORY_REPOSITORY_DISPATCHER }}
-          private_key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
+          app-id: ${{ secrets.APP_ID_BLENDFACTORY_REPOSITORY_DISPATCHER }}
+          private-key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
           owner: ${{ github.repository_owner }}
       - name: Dispatch repository event
         uses: peter-evans/repository-dispatch@v2
