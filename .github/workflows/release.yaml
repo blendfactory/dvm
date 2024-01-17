@@ -49,7 +49,7 @@ jobs:
         args:
           [
             { image: macos-latest, arch: x64 },
-            { image: macos-latest, arch: arm64 }, # macos-latest-xlarge is not available yet
+            { image: macos-latest-xlarge, arch: arm64 },
           ]
     runs-on: ${{ matrix.args.image }}
     steps:
