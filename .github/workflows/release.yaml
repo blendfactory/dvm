@@ -91,3 +91,51 @@ jobs:
             build/dvm-${{ env.version }}-windows-ia32.sha256
             build/dvm-${{ env.version }}-windows-x64.sha256
           tag_name: ${{ env.version }}
+  update-homebrew:
+    needs:
+      [
+        create-release,
+        upload-excutables-linux,
+        upload-excutables-macos,
+        upload-excutables-windows,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Extract version
+        run: echo "version=$(dart run grinder pkg-version)" >> $GITHUB_ENV
+      - name: Download checksums
+        uses: robinraju/release-downloader@v1.8
+        with:
+          tag: ${{ env.version }}
+          fileName: "*.sha256"
+      - name: Extract checksums
+        id: checksums
+        shell: bash
+        run: |
+          echo "sha256_macos_x64=$(cat dvm-${{ env.version }}-macos-x64.sha256 | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+          echo "sha256_macos_arm64=$(cat dvm-${{ env.version }}-macos-arm64.sha256 | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+          echo "sha256_linux_x64=$(cat dvm-${{ env.version }}-linux-x64.sha256 | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+      - name: Generate a token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID_BLENDFACTORY_REPOSITORY_DISPATCHER }}
+          private_key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
+          owner: ${{ github.repository_owner }}
+      - name: Dispatch repository event
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          repository: blendfactory/homebrew-tap
+          event-type: update-dvm
+          client-payload: |-
+            {
+              "version": "${{ env.version }}",
+              "sha256_macos_x64": "${{ steps.checksums.outputs.sha256_macos_x64 }}",
+              "sha256_macos_arm64": "${{ steps.checksums.outputs.sha256_macos_arm64 }}",
+              "sha256_linux_x64": "${{ steps.checksums.outputs.sha256_linux_x64 }}",
+            }
