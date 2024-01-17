@@ -137,5 +137,5 @@ jobs:
               "version": "${{ env.version }}",
               "sha256_macos_x64": "${{ steps.checksums.outputs.sha256_macos_x64 }}",
               "sha256_macos_arm64": "${{ steps.checksums.outputs.sha256_macos_arm64 }}",
-              "sha256_linux_x64": "${{ steps.checksums.outputs.sha256_linux_x64 }}",
+              "sha256_linux_x64": "${{ steps.checksums.outputs.sha256_linux_x64 }}"
             }
