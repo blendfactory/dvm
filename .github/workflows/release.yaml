@@ -1,4 +1,4 @@
-name: Release to GitHub
+name: Release to GitHub and Homebrew
 
 on:
   workflow_dispatch:
