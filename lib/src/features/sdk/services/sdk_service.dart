@@ -160,6 +160,12 @@ final class SdkService {
         throw Exception('Could not find Dart SDK');
       }
       await _permissionClient.grantExecPermission(dartBin);
+
+      final dartAotRuntimeBin = versionCacheDir.childFile('bin/dartaotruntime');
+      if (!dartAotRuntimeBin.existsSync()) {
+        throw Exception('Could not find Dart AOT Runtime');
+      }
+      await _permissionClient.grantExecPermission(dartAotRuntimeBin);
     }
   }
 }
