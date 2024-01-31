@@ -8,6 +8,10 @@ Inspired by [FVM].
 
 For those interested in the evolution process of DVM, please visit the [GitHub Project].
 
+## GitHub Actions
+
+See [dvm-config-action].
+
 ## Contributors
 
 <a href="https://github.com/blendfactory/dvm/graphs/contributors">
@@ -18,3 +22,4 @@ For those interested in the evolution process of DVM, please visit the [GitHub P
 
 [FVM]: https://github.com/leoafarias/fvm
 [GitHub Project]: https://github.com/orgs/blendfactory/projects/1
+[dvm-config-action]: https://github.com/blendfactory/dvm-config-action
