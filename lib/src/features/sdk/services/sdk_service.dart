@@ -112,6 +112,29 @@ final class SdkService {
     return versions;
   }
 
+  Future<List<SdkVersion>> getInstalledSdks({
+    required SdkChannel? channel,
+  }) async {
+    if (!_sdkCacheDir.existsSync()) {
+      return [];
+    }
+
+    final versions = _sdkCacheDir
+        .listSync()
+        .whereType<Directory>()
+        .map((dir) {
+          try {
+            return SdkVersion.fromString(dir.basename);
+          } on FormatException catch (_) {
+            return null;
+          }
+        })
+        .nonNulls
+        .where((version) => channel == null || version.channel == channel)
+        .toList();
+    return versions;
+  }
+
   bool exitsSdk({
     required SdkVersion version,
   }) {
