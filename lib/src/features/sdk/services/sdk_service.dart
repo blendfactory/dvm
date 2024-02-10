@@ -191,4 +191,19 @@ final class SdkService {
       await _permissionClient.grantExecPermission(dartAotRuntimeBin);
     }
   }
+
+  Future<void> uninstallSdk({
+    required SdkVersion version,
+  }) async {
+    final versionCacheDir = _sdkCacheDir.childDirectory(version.toString());
+    if (versionCacheDir.existsSync()) {
+      versionCacheDir.deleteSync(recursive: true);
+    }
+  }
+
+  Future<void> uninstallAllSdks() async {
+    if (_sdkCacheDir.existsSync()) {
+      _sdkCacheDir.deleteSync(recursive: true);
+    }
+  }
 }
