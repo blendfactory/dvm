@@ -1,4 +1,6 @@
 {
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml,",
