@@ -15,7 +15,7 @@
   },
   "github.copilot.editor.enableCodeActions": true,
   "github.copilot.editor.enableAutoCompletions": true,
-  "[json][jsonc][markdown]": {
+  "[json][jsonc][markdown][yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
