@@ -1,5 +1,10 @@
 ## 0.0.3
 
+### Added
+
+- Create a command for showing installed Dart SDK versions.
+  - `dvm list`
+
 ## 0.0.2
 
 ### Improved
