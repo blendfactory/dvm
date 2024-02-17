@@ -4,10 +4,13 @@ description: "Set up a Dart project"
 runs:
   using: "composite"
   steps:
+    - name: Extract Dart Version
+      uses: blendfactory/dvm-config-action@v1
+      id: dvm-config-action
     - name: Set up Dart
       uses: dart-lang/setup-dart@v1
       with:
-        sdk: 3.2.3
+        sdk: ${{ steps.dvm-config-action.dart-sdk-version }}
 
     - name: Get dependencies
       run: dart pub get
