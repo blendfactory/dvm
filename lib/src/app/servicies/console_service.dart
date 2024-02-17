@@ -55,13 +55,4 @@ $message''';
         message,
         defaultValue: defaultValue,
       );
-
-  T chooseOne<T>({
-    required String message,
-    required List<T> choices,
-  }) =>
-      _logger.chooseOne(
-        message,
-        choices: choices,
-      );
 }

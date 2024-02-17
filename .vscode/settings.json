@@ -1,21 +1,7 @@
 {
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml,",
-    "*.dart": "$(capture).g.dart, $(capture).part.dart"
-  },
-  "github.copilot.enable": {
-    "*": false,
-    "markdown": true,
-    "dart": true,
-    "json": true,
-    "yaml": true
-  },
-  "github.copilot.editor.enableCodeActions": true,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "[json][jsonc][markdown][yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml,",
+        "*.dart": "$(capture).g.dart, $(capture).part.dart",
+    }
 }

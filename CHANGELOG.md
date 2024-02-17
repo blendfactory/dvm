@@ -1,12 +1,3 @@
-## 0.0.3
-
-### Added
-
-- Create a command for showing installed Dart SDK versions.
-  - `dvm list`
-- Create a command for uninstalling Dart SDK versions.
-  - `dvm uninstall <version>`
-
 ## 0.0.2
 
 ### Improved
