@@ -3,9 +3,7 @@ import 'package:args/command_runner.dart';
 import 'package:dvmx/src/app/app_container.dart';
 import 'package:dvmx/src/app/commands/dart_command.dart';
 import 'package:dvmx/src/app/commands/install_command.dart';
-import 'package:dvmx/src/app/commands/list_command.dart';
 import 'package:dvmx/src/app/commands/releases_command.dart';
-import 'package:dvmx/src/app/commands/uninstall_command.dart';
 import 'package:dvmx/src/app/commands/use_command.dart';
 import 'package:dvmx/src/app/gen/cli_info.g.dart';
 import 'package:dvmx/src/app/models/exit_status.dart';
@@ -33,8 +31,6 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
     addCommand(InstallCommand());
     addCommand(UseCommand());
     addCommand(DartCommand());
-    addCommand(ListCommand());
-    addCommand(UninstallCommand());
   }
 
   ConsoleService get _consoleService =>
