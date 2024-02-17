@@ -5,19 +5,13 @@
       "type": "pickString",
       "id": "commands",
       "description": "Select a command to run",
-      "options": [
-        "--version",
-        "releases",
-        "install",
-        "use",
-        "dart",
-      ],
+      "options": ["--version", "releases", "install", "use", "dart"]
     },
     {
       "type": "promptString",
       "id": "args",
-      "description": "Enter the command arguments",
-    },
+      "description": "Enter the command arguments"
+    }
   ],
   "configurations": [
     {
@@ -25,22 +19,15 @@
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "toolArgs": [
-        "--define=DEBUG=true",
-      ],
-      "args": [
-        "${input:commands}",
-        "${input:args}",
-      ],
+      "toolArgs": ["--define=DEBUG=true"],
+      "args": ["${input:commands}", "${input:args}"]
     },
     {
       "name": "release",
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "args": [
-        "${input:commands}",
-      ],
-    },
-  ],
+      "args": ["${input:commands}"]
+    }
+  ]
 }
