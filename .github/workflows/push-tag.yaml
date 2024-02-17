@@ -27,7 +27,10 @@ jobs:
           app-id: ${{ secrets.APP_ID_BLENDFACTORY_TAG_PUSHER }}
           private-key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_TAG_PUSHER }}
       - name: Commit Tag
-        run: git tag -a ${{ steps.extract-version.outputs.version }}
+        run: |
+          git config --global user.email "32213113+blendthink@users.noreply.github.com"
+          git config --global user.name "blendthink"
+          git tag -a ${{ steps.extract-version.outputs.version }} -m "Release ${{ steps.extract-version.outputs.version }}"
       - name: Push Tag
         uses: ad-m/github-push-action@d91a481090679876dfc4178fef17f286781251df # v0.8.0
         with:
