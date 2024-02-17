@@ -1,0 +1,33 @@
+name: Check Pull Request
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Report analyze
+        uses: invertase/github-action-dart-analyzer@v1
+        with:
+          fatal-infos: true
+      - name: Run Test
+        run: dart test --file-reporter="json:test-results.json"
+        continue-on-error: true
+      - name: Report test
+        uses: dorny/test-reporter@v1
+        with:
+          name: "Dart Test"
+          path: "test-results.json"
+          reporter: "dart-json"
+          fail-on-error: "true"
