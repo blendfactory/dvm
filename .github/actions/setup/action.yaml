@@ -11,7 +11,6 @@ runs:
       uses: dart-lang/setup-dart@v1
       with:
         sdk: ${{ steps.dvm-config-action.dart-sdk-version }}
-
     - name: Get dependencies
       run: dart pub get
       shell: bash
