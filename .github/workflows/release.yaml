@@ -131,7 +131,7 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
           owner: ${{ github.repository_owner }}
       - name: Dispatch repository event
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3.0.0
         with:
           token: ${{ steps.app-token.outputs.token }}
           repository: blendfactory/homebrew-tap
