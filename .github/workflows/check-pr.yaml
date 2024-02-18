@@ -18,7 +18,7 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
       - name: Report analyze
-        uses: invertase/github-action-dart-analyzer@v1
+        uses: invertase/github-action-dart-analyzer@cdd8652b05bf7ed08ffce30f425436780f869f13 # v1
         with:
           fatal-infos: true
       - name: Run Test
