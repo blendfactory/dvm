@@ -1,0 +1,15 @@
+name: "Extract DVM Version"
+description: "Extract the DVM version from grinder command."
+
+outputs:
+  version:
+    description: "The extracted DVM version."
+    value: ${{ steps.extract.outputs.version }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Extract Version
+      id: extract
+      shell: bash
+      run: echo "version=$(dart run grinder pkg-version)" >> $GITHUB_OUTPUT
