@@ -14,18 +14,18 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: Setup
         uses: ./.github/actions/setup
       - name: Report analyze
-        uses: invertase/github-action-dart-analyzer@v1
+        uses: invertase/github-action-dart-analyzer@cdd8652b05bf7ed08ffce30f425436780f869f13 # v1
         with:
           fatal-infos: true
       - name: Run Test
         run: dart test --file-reporter="json:test-results.json"
         continue-on-error: true
       - name: Report test
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@eaa763f6ffc21c7a37837f56cd5f9737f27fc6c8 # v1.8.0
         with:
           name: "Dart Test"
           path: "test-results.json"

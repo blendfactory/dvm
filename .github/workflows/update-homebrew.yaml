@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: Setup
         uses: ./.github/actions/setup
       - name: Extract DVM version
         id: extract-dvm-version
         uses: ./.github/actions/extract-dvm-version
       - name: Download checksums
-        uses: robinraju/release-downloader@v1.8
+        uses: robinraju/release-downloader@368754b9c6f47c345fcfbf42bcb577c2f0f5f395 # v1.9
         with:
           tag: ${{ steps.extract-dvm-version.outputs.version }}
           fileName: "*.sha256"
@@ -28,13 +28,13 @@ jobs:
           echo "sha256_linux_x64=$(cat dvm-${{ steps.extract-dvm-version.outputs.version }}-linux-x64.sha256 | awk '{ print $1 }')" >> $GITHUB_OUTPUT
       - name: Generate a token
         id: app-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@f4c6bf6752984b3a29fcc135a5e70eb792c40c6b # v1.8.0
         with:
           app-id: ${{ secrets.APP_ID_BLENDFACTORY_REPOSITORY_DISPATCHER }}
           private-key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
           owner: ${{ github.repository_owner }}
       - name: Dispatch repository event
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3.0.0
         with:
           token: ${{ steps.app-token.outputs.token }}
           repository: blendfactory/homebrew-tap
