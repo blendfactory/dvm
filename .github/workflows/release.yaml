@@ -36,7 +36,7 @@ jobs:
         id: extract-dvm-version
         uses: ./.github/actions/extract-dvm-version
       - name: Upload checksums to GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
         with:
           files: |
             build/dvm-${{ steps.extract-dvm-version.outputs.version }}-linux-ia32.sha256
@@ -67,7 +67,7 @@ jobs:
         id: extract-dvm-version
         uses: ./.github/actions/extract-dvm-version
       - name: Upload checksums to GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
         with:
           files: |
             build/dvm-${{ steps.extract-dvm-version.outputs.version }}-macos-${{ matrix.args.arch }}.sha256
@@ -88,7 +88,7 @@ jobs:
         id: extract-dvm-version
         uses: ./.github/actions/extract-dvm-version
       - name: Upload checksums to GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
         with:
           files: |
             build/dvm-${{ steps.extract-dvm-version.outputs.version }}-windows-ia32.sha256
