@@ -125,7 +125,7 @@ jobs:
           echo "sha256_linux_x64=$(cat dvm-${{ steps.extract-dvm-version.outputs.version }}-linux-x64.sha256 | awk '{ print $1 }')" >> $GITHUB_OUTPUT
       - name: Generate a token
         id: app-token
-        uses: actions/create-github-app-token@f4c6bf6752984b3a29fcc135a5e70eb792c40c6b # v1.8.0
+        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1.8.1
         with:
           app-id: ${{ secrets.APP_ID_BLENDFACTORY_REPOSITORY_DISPATCHER }}
           private-key: ${{ secrets.PRIVATE_KEY_BLENDFACTORY_REPOSITORY_DISPATCHER }}
