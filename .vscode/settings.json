@@ -1,4 +1,5 @@
 {
+  "dart.sdkPath": ".dvm/dart_sdk",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "explorer.fileNesting.enabled": true,
