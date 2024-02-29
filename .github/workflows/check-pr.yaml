@@ -26,6 +26,14 @@ jobs:
         with:
           fatal-infos: true
 
+      - name: Regenerate code
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Check difference
+        run: |
+          git add -N .
+          git diff --name-only --exit-code
+
       - name: Run Test
         run: dart test --file-reporter="json:test-results.json"
         continue-on-error: true
