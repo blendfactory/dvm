@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';
-import 'package:dvmx/src/app/gen/cli_info.g.dart';
+import 'package:dvmx/src/app/gen/cli_info.dart';
 import 'package:grinder/grinder.dart';
 
 const _osToArchs = {
