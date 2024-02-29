@@ -16,7 +16,7 @@ dependencies:
   file: ^7.0.0
   http: ^1.2.1
   json_annotation: ^4.8.1
-  mason_logger: ^0.2.11
+  mason_logger: ^0.2.12
   meta: ^1.11.0
   pub_semver: ^2.1.4
   riverpod: ^2.4.9
