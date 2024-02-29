@@ -12,3 +12,6 @@ targets:
           ignore_for_file:
             - type=lint
             - duplicate_ignore
+      cli_info_builder:
+        options:
+          output: "lib/src/app/gen/cli_info.dart"

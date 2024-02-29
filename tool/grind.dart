@@ -1,5 +1,5 @@
 import 'package:cli_pkg/cli_pkg.dart' as pkg;
-import 'package:dvmx/src/app/gen/cli_info.g.dart';
+import 'package:dvmx/src/app/gen/cli_info.dart';
 import 'package:grinder/grinder.dart';
 
 import 'checksum.dart';
