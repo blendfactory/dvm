@@ -34,7 +34,7 @@ jobs:
           git add -N .
           git diff --name-only --exit-code
 
-      - name: Run Test
+      - name: Run test
         run: dart test --file-reporter="json:test-results.json"
         continue-on-error: true
 
