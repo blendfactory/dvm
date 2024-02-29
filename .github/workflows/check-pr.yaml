@@ -16,6 +16,7 @@ jobs:
       # https://github.com/actions/checkout
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
       - name: Setup
         uses: ./.github/actions/setup
 
@@ -24,9 +25,11 @@ jobs:
         uses: invertase/github-action-dart-analyzer@e981b01a458d0bab71ee5da182e5b26687b7101b # v3.0.0
         with:
           fatal-infos: true
+
       - name: Run Test
         run: dart test --file-reporter="json:test-results.json"
         continue-on-error: true
+
       # https://github.com/dorny/test-reporter
       - name: Report test
         uses: dorny/test-reporter@eaa763f6ffc21c7a37837f56cd5f9737f27fc6c8 # v1.8.0
