@@ -1,3 +1,10 @@
+## 0.0.5
+
+### Fixed
+
+- Fix pub warning.
+  - "To format your files run: `dart format .`"
+
 ## 0.0.4
 
 ### Added
