@@ -1,3 +1,18 @@
+## 0.0.4
+
+### Added
+
+- Add `--latest` option flag to `dvm releases`.
+  - `dvm releases --latest`
+- Add `--latest` option flag to `dvm install`.
+  - `dvm install --latest`
+- Add `--latest` option flag to `dvm use`.
+  - `dvm use --latest`
+
+### Changed
+
+- Remove extraneous margins from the output of `dvm --version`.
+
 ## 0.0.3
 
 ### Added
