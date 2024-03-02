@@ -2,10 +2,30 @@ import 'package:dvmx/dvmx.dart';
 import 'package:dvmx/src/app/app_commnad.dart';
 import 'package:dvmx/src/app/app_container.dart';
 import 'package:dvmx/src/app/command_services/use_command_service.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 
+const _latestKey = 'latest';
+const _channelKey = 'channel';
+
 final class UseCommand extends AppCommand {
-  UseCommand();
+  UseCommand() {
+    argParser.addFlag(
+      _latestKey,
+      abbr: 'l',
+      help:
+          '''Use the latest release. This option takes precedence even if a version is specified.''',
+      negatable: false,
+    );
+    argParser.addOption(
+      _channelKey,
+      abbr: 'c',
+      help:
+          '''Used only if the `latest` option is specified. Specifies from which channel the latest release is used.''',
+      allowed: SdkChannel.values.map((c) => c.name),
+      defaultsTo: SdkChannel.stable.name,
+    );
+  }
 
   @override
   final name = 'use';
@@ -33,6 +53,10 @@ final class UseCommand extends AppCommand {
         usageException(e.message);
       }
     }
+
+    final channel = argResults[_channelKey] as String;
+    final sdkChannel = SdkChannel.values.byName(channel);
+    final isLatest = argResults.wasParsed(_latestKey);
 
     final useCommandService = appContainer.read(useCommandServiceProvider);
 
