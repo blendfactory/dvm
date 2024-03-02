@@ -42,6 +42,9 @@ final class ReleasesCommand extends AppCommand {
     final releasesCommandService =
         appContainer.read(releasesCommandServiceProvider);
 
-    return releasesCommandService.call(channel: sdkChannel);
+    return releasesCommandService.call(
+      channel: sdkChannel,
+      isLatest: isLatest,
+    );
   }
 }
