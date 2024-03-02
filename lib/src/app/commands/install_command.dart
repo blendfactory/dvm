@@ -62,6 +62,10 @@ final class InstallCommand extends AppCommand {
 
     return installCommandService.call(
       version: sdkVersion,
+      latestOptions: (
+        isLatest: isLatest,
+        channel: sdkChannel,
+      ),
       throwUsageException: usageException,
     );
   }
