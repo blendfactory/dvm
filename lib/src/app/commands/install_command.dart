@@ -2,10 +2,30 @@ import 'package:dvmx/dvmx.dart';
 import 'package:dvmx/src/app/app_commnad.dart';
 import 'package:dvmx/src/app/app_container.dart';
 import 'package:dvmx/src/app/command_services/install_command_service.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 
+const _latestKey = 'latest';
+const _channelKey = 'channel';
+
 final class InstallCommand extends AppCommand {
-  InstallCommand();
+  InstallCommand() {
+    argParser.addFlag(
+      _latestKey,
+      abbr: 'l',
+      help:
+          '''Install the latest release. This option takes precedence even if a version is specified.''',
+      negatable: false,
+    );
+    argParser.addOption(
+      _channelKey,
+      abbr: 'c',
+      help:
+          '''Used only if the `latest` option is specified. Specifies from which channel the latest release is installed.''',
+      allowed: SdkChannel.values.map((c) => c.name),
+      defaultsTo: SdkChannel.stable.name,
+    );
+  }
 
   @override
   final name = 'install';
@@ -34,11 +54,19 @@ final class InstallCommand extends AppCommand {
       }
     }
 
+    final channel = argResults[_channelKey] as String;
+    final sdkChannel = SdkChannel.values.byName(channel);
+    final isLatest = argResults.wasParsed(_latestKey);
+
     final installCommandService =
         appContainer.read(installCommandServiceProvider);
 
     return installCommandService.call(
       version: sdkVersion,
+      latestOptions: (
+        isLatest: isLatest,
+        channel: sdkChannel,
+      ),
       throwUsageException: usageException,
     );
   }

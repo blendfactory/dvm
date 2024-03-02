@@ -11,7 +11,7 @@ final class UninstallCommand extends AppCommand {
     argParser.addFlag(
       _allFlagKey,
       abbr: 'a',
-      help: 'Uninstall all Dart SDKs',
+      help: 'Uninstall all Dart SDKs.',
       negatable: false,
     );
   }
