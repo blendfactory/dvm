@@ -2,6 +2,7 @@ import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/abi_service.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
 import 'package:dvmx/src/features/project_config/services/project_config_service.dart';
+import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 import 'package:dvmx/src/features/sdk/services/sdk_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -49,8 +50,23 @@ final class UseCommandService {
 
   Future<ExitStatus> call({
     required SdkVersion? version,
+    required LatestOptions latestOptions,
     required ThrowUsageException throwUsageException,
   }) async {
+    if (latestOptions.isLatest) {
+      final version = await _sdkService.getLatestSdk(
+        channel: latestOptions.channel,
+      );
+      return call(
+        version: version,
+        latestOptions: (
+          isLatest: false,
+          channel: latestOptions.channel,
+        ),
+        throwUsageException: throwUsageException,
+      );
+    }
+
     final SdkVersion sdkVersion;
     if (version == null) {
       final projectSdkVersion = _projectConfigService.findProjectSdkVersion();
@@ -111,5 +127,10 @@ final class UseCommandService {
     return ExitStatus.success;
   }
 }
+
+typedef LatestOptions = ({
+  bool isLatest,
+  SdkChannel channel,
+});
 
 typedef ThrowUsageException = Never Function(String message);
