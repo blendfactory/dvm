@@ -12,7 +12,9 @@ import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
 import 'package:mason_logger/mason_logger.dart';
 
+/// A command runner for the DVM.
 final class AppCommandRunner extends CommandRunner<ExitStatus> {
+  /// Creates a new instance of [AppCommandRunner].
   AppCommandRunner()
       : super(
           cliInfo.name,
