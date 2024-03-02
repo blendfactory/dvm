@@ -70,9 +70,7 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
   }
 
   void _printCliVersion() {
-    _consoleService.spacer();
     _consoleService.info(cliInfo.version);
-    _consoleService.spacer();
   }
 
   void _printUsageException(UsageException e) {
