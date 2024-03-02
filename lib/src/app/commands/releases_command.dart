@@ -4,10 +4,12 @@ import 'package:dvmx/src/app/command_services/releases_command_services.dart';
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 
+const _channelKey = 'channel';
+
 final class ReleasesCommand extends AppCommand {
   ReleasesCommand() {
     argParser.addOption(
-      'channel',
+      _channelKey,
       help: 'Filter by channel name',
       abbr: 'c',
       allowed: SdkChannel.values.map((c) => c.name),
@@ -26,7 +28,7 @@ final class ReleasesCommand extends AppCommand {
 
   @override
   Future<ExitStatus> run() async {
-    final channel = argResults['channel'] as String;
+    final channel = argResults[_channelKey] as String;
     final sdkChannel = SdkChannel.values.byName(channel);
 
     final releasesCommandService =
