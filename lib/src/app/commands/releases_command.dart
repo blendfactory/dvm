@@ -11,8 +11,8 @@ final class ReleasesCommand extends AppCommand {
   ReleasesCommand() {
     argParser.addOption(
       _channelKey,
-      help: 'Filter by channel name',
       abbr: 'c',
+      help: 'Filter by channel name',
       allowed: SdkChannel.values.map((c) => c.name),
       defaultsTo: SdkChannel.stable.name,
     );

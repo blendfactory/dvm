@@ -19,9 +19,9 @@ final class InstallCommand extends AppCommand {
     );
     argParser.addOption(
       _channelKey,
+      abbr: 'c',
       help:
           '''Used only if the `latest` option is specified. Specifies from which channel the latest release is installed.''',
-      abbr: 'c',
       allowed: SdkChannel.values.map((c) => c.name),
       defaultsTo: SdkChannel.stable.name,
     );
