@@ -13,7 +13,8 @@ final class InstallCommand extends AppCommand {
     argParser.addFlag(
       _latestKey,
       abbr: 'l',
-      help: 'Install the latest release',
+      help:
+          '''Install the latest release. This option takes precedence even if a version is specified.''',
       negatable: false,
     );
     argParser.addOption(
