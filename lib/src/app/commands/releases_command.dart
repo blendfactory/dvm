@@ -4,14 +4,23 @@ import 'package:dvmx/src/app/command_services/releases_command_services.dart';
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
 
+const _channelKey = 'channel';
+const _latestKey = 'latest';
+
 final class ReleasesCommand extends AppCommand {
   ReleasesCommand() {
     argParser.addOption(
-      'channel',
+      _channelKey,
       help: 'Filter by channel name',
       abbr: 'c',
       allowed: SdkChannel.values.map((c) => c.name),
       defaultsTo: SdkChannel.stable.name,
+    );
+    argParser.addFlag(
+      _latestKey,
+      abbr: 'l',
+      help: 'Show only the latest release',
+      negatable: false,
     );
   }
 
@@ -26,12 +35,16 @@ final class ReleasesCommand extends AppCommand {
 
   @override
   Future<ExitStatus> run() async {
-    final channel = argResults['channel'] as String;
+    final channel = argResults[_channelKey] as String;
     final sdkChannel = SdkChannel.values.byName(channel);
+    final isLatest = argResults.wasParsed(_latestKey);
 
     final releasesCommandService =
         appContainer.read(releasesCommandServiceProvider);
 
-    return releasesCommandService.call(channel: sdkChannel);
+    return releasesCommandService.call(
+      channel: sdkChannel,
+      isLatest: isLatest,
+    );
   }
 }

@@ -36,9 +36,15 @@ final class ReleasesCommandService {
 
   Future<ExitStatus> call({
     required SdkChannel channel,
+    required bool isLatest,
   }) async {
     try {
       final versions = await _sdkService.getSdks(channel: channel);
+      if (isLatest) {
+        final latestVersion = versions.last;
+        _consoleService.info(latestVersion.toString());
+        return ExitStatus.success;
+      }
       for (final version in versions) {
         _consoleService.info(version.toString());
       }
