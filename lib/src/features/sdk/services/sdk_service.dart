@@ -112,6 +112,16 @@ final class SdkService {
     return versions;
   }
 
+  Future<SdkVersion> getLatestSdk({
+    required SdkChannel channel,
+  }) async {
+    final versions = await getSdks(channel: channel);
+    if (versions.isEmpty) {
+      throw Exception('Could not find Dart SDK');
+    }
+    return versions.last;
+  }
+
   Future<List<SdkVersion>> getInstalledSdks({
     required SdkChannel? channel,
   }) async {
