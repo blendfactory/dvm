@@ -25,7 +25,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.8
-  cli_info_builder: ^1.0.0
+  cli_info_builder: ^1.0.1
   cli_pkg: ^2.9.0
   crypto: ^3.0.3
   custom_lint: ^0.5.11
