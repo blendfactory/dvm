@@ -8,5 +8,5 @@ import 'package:cli_info/cli_info.dart';
 const cliInfo = CliInfo(
   name: 'dvm',
   description: 'Dart Version Management: A simple CLI to manage Dart SDK versions per project.',
-  version: '0.0.3',
+  version: '0.0.4',
 );
