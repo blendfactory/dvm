@@ -12,14 +12,14 @@ final class ReleasesCommand extends AppCommand {
     argParser.addOption(
       _channelKey,
       abbr: 'c',
-      help: 'Filter by channel name',
+      help: 'Filter by channel name.',
       allowed: SdkChannel.values.map((c) => c.name),
       defaultsTo: SdkChannel.stable.name,
     );
     argParser.addFlag(
       _latestKey,
       abbr: 'l',
-      help: 'Show only the latest release',
+      help: 'Show only the latest release.',
       negatable: false,
     );
   }

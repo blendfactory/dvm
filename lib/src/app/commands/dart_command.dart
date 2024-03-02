@@ -14,7 +14,7 @@ final class DartCommand extends AppCommand {
   final description = 'Proxy a dart command.';
 
   @override
-  String get invocation => 'dvm dart <args>';
+  String get invocation => 'dvm dart <args>.';
 
   @override
   List<String> get aliases => ['d'];

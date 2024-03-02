@@ -9,7 +9,7 @@ final class ListCommand extends AppCommand {
     argParser.addOption(
       'channel',
       abbr: 'c',
-      help: 'Filter by channel name',
+      help: 'Filter by channel name.',
       allowed: SdkChannel.values.map((c) => c.name),
     );
   }
