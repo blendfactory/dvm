@@ -62,6 +62,10 @@ final class UseCommand extends AppCommand {
 
     return useCommandService.call(
       version: sdkVersion,
+      latestOptions: (
+        isLatest: isLatest,
+        channel: sdkChannel,
+      ),
       throwUsageException: usageException,
     );
   }
