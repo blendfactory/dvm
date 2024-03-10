@@ -2,7 +2,7 @@ import 'package:dvmx/src/app/app_commnad.dart';
 import 'package:dvmx/src/app/app_container.dart';
 import 'package:dvmx/src/app/command_services/releases_command_services.dart';
 import 'package:dvmx/src/app/models/exit_status.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
+import 'package:dvmx/src/cores/models/sdk_channel.dart';
 
 const _channelKey = 'channel';
 const _latestKey = 'latest';
