@@ -20,14 +20,16 @@
       "type": "dart",
       "program": "bin/dvm.dart",
       "toolArgs": ["--define=DEBUG=true"],
-      "args": ["${input:commands}", "${input:args}"]
+      "args": ["${input:commands}", "${input:args}"],
+      "console": "terminal"
     },
     {
       "name": "release",
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "args": ["${input:commands}"]
+      "args": ["${input:commands}"],
+      "console": "terminal"
     }
   ]
 }
