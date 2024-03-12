@@ -8,7 +8,7 @@ part of 'dvm_home_dir.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dvmHomeDirHash() => r'7b8a2b5c15f5be842b574c6899276ef64376ae22';
+String _$dvmHomeDirHash() => r'9c9e1c317862c3f1061273cfa0331a1c733aa76a';
 
 /// See also [dvmHomeDir].
 @ProviderFor(dvmHomeDir)
@@ -17,10 +17,10 @@ final dvmHomeDirProvider = AutoDisposeProvider<Directory>.internal(
   name: r'dvmHomeDirProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$dvmHomeDirHash,
-  dependencies: <ProviderOrFamily>[fileSystemProvider],
+  dependencies: <ProviderOrFamily>[homeDirProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
-    fileSystemProvider,
-    ...?fileSystemProvider.allTransitiveDependencies
+    homeDirProvider,
+    ...?homeDirProvider.allTransitiveDependencies
   },
 );
 
