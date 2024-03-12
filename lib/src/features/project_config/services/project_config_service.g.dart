@@ -8,7 +8,7 @@ part of 'project_config_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$projectConfigDirHash() => r'5091c316ac70a65f6b9cea2002d345fbb4d05e84';
+String _$projectConfigDirHash() => r'ee9a4a5b45d1b13dfa490bc859ab499c55a3c604';
 
 /// See also [projectConfigDir].
 @ProviderFor(projectConfigDir)
@@ -18,12 +18,10 @@ final projectConfigDirProvider = AutoDisposeProvider<Directory>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$projectConfigDirHash,
-  dependencies: <ProviderOrFamily>[isDebugProvider, fileSystemProvider],
+  dependencies: <ProviderOrFamily>[projectRootDirProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
-    isDebugProvider,
-    ...?isDebugProvider.allTransitiveDependencies,
-    fileSystemProvider,
-    ...?fileSystemProvider.allTransitiveDependencies
+    projectRootDirProvider,
+    ...?projectRootDirProvider.allTransitiveDependencies
   },
 );
 
