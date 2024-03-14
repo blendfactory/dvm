@@ -8,7 +8,7 @@ part of 'global_root_dir.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$globalRootDirHash() => r'ecd223ebb7948696bd7d759aae05a909b8d3a5e0';
+String _$globalRootDirHash() => r'352e436c45a548e9fef9060bc16b6e4d5c9f2d92';
 
 /// See also [globalRootDir].
 @ProviderFor(globalRootDir)
