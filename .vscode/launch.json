@@ -9,7 +9,12 @@
     },
     {
       "type": "promptString",
-      "id": "args",
+      "id": "args1",
+      "description": "Enter the command arguments"
+    },
+    {
+      "type": "promptString",
+      "id": "args2",
       "description": "Enter the command arguments"
     }
   ],
@@ -20,7 +25,7 @@
       "type": "dart",
       "program": "bin/dvm.dart",
       "toolArgs": ["--define=DEBUG=true"],
-      "args": ["${input:commands}", "${input:args}"],
+      "args": ["${input:commands}", "${input:args1}", "${input:args2}"],
       "console": "terminal"
     },
     {
@@ -28,7 +33,7 @@
       "request": "launch",
       "type": "dart",
       "program": "bin/dvm.dart",
-      "args": ["${input:commands}"],
+      "args": ["${input:commands}", "${input:args1}", "${input:args2}"],
       "console": "terminal"
     }
   ]
