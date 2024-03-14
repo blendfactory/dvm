@@ -19,7 +19,7 @@ Directory globalRootDir(GlobalRootDirRef ref) {
   final dvmHomeDir = ref.watch(dvmHomeDirProvider);
 
   if (isDebug) {
-    return developmentDir.childDirectory('global');
+    return developmentDir;
   } else {
     return dvmHomeDir;
   }
