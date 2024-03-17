@@ -21,7 +21,7 @@ final class ListCommand extends AppCommand {
   final description = 'Display the installed Dart SDK versions.';
 
   @override
-  List<String> get aliases => ['l'];
+  List<String> get aliases => ['ls'];
 
   @override
   Future<ExitStatus> run() async {
