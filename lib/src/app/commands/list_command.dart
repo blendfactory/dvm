@@ -4,10 +4,12 @@ import 'package:dvmx/src/app/command_services/list_command_service.dart';
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/cores/models/sdk_channel.dart';
 
+const _channelKey = 'channel';
+
 final class ListCommand extends AppCommand {
   ListCommand() {
     argParser.addOption(
-      'channel',
+      _channelKey,
       abbr: 'c',
       help: 'Filter by channel name.',
       allowed: SdkChannel.values.map((c) => c.name),
@@ -25,7 +27,7 @@ final class ListCommand extends AppCommand {
 
   @override
   Future<ExitStatus> run() async {
-    final channel = argResults['channel'] as String?;
+    final channel = argResults[_channelKey] as String?;
     final sdkChannel = switch (channel) {
       null => null,
       final c => SdkChannel.values.byName(c),
