@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:dvmx/src/cores/local/file_system.dart';
+import 'package:dvmx/src/cores/local/dvm_home_dir.dart';
 import 'package:file/file.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,13 +6,10 @@ part 'sdk_cache_dir.g.dart';
 
 @Riverpod(
   dependencies: [
-    fileSystem,
+    dvmHomeDir,
   ],
 )
 Directory sdkCacheDir(SdkCacheDirRef ref) {
-  final fileSystem = ref.watch(fileSystemProvider);
-  final userHome = Platform.isWindows
-      ? Platform.environment['USERPROFILE']!
-      : Platform.environment['HOME']!;
-  return fileSystem.directory('$userHome/.dvm/cache/versions');
+  final dvmHomeDir = ref.watch(dvmHomeDirProvider);
+  return dvmHomeDir.childDirectory('cache/versions');
 }

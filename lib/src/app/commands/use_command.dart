@@ -2,11 +2,12 @@ import 'package:dvmx/dvmx.dart';
 import 'package:dvmx/src/app/app_commnad.dart';
 import 'package:dvmx/src/app/app_container.dart';
 import 'package:dvmx/src/app/command_services/use_command_service.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/src/cores/models/sdk_channel.dart';
+import 'package:dvmx/src/cores/models/sdk_version.dart';
 
 const _latestKey = 'latest';
 const _channelKey = 'channel';
+const _globalKey = 'global';
 
 final class UseCommand extends AppCommand {
   UseCommand() {
@@ -24,6 +25,12 @@ final class UseCommand extends AppCommand {
           '''Used only if the `latest` option is specified. Specifies from which channel the latest release is used.''',
       allowed: SdkChannel.values.map((c) => c.name),
       defaultsTo: SdkChannel.stable.name,
+    );
+    argParser.addFlag(
+      _globalKey,
+      abbr: 'g',
+      help: 'Sets the Dart SDK as a global.',
+      negatable: false,
     );
   }
 
@@ -58,6 +65,8 @@ final class UseCommand extends AppCommand {
     final sdkChannel = SdkChannel.values.byName(channel);
     final isLatest = argResults.wasParsed(_latestKey);
 
+    final isGlobal = argResults.wasParsed(_globalKey);
+
     final useCommandService = appContainer.read(useCommandServiceProvider);
 
     return useCommandService.call(
@@ -66,6 +75,7 @@ final class UseCommand extends AppCommand {
         isLatest: isLatest,
         channel: sdkChannel,
       ),
+      isGlobal: isGlobal,
       throwUsageException: usageException,
     );
   }

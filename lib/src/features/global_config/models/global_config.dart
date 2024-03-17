@@ -1,16 +1,16 @@
 import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'project_config.g.dart';
+part 'global_config.g.dart';
 
 @JsonSerializable()
-final class ProjectConfig {
-  const ProjectConfig({
+final class GlobalConfig {
+  const GlobalConfig({
     required this.version,
   });
 
-  factory ProjectConfig.fromJson(Map<String, dynamic> json) =>
-      _$ProjectConfigFromJson(json);
+  factory GlobalConfig.fromJson(Map<String, dynamic> json) =>
+      _$GlobalConfigFromJson(json);
 
   @JsonKey(
     name: 'dartSdkVersion',
@@ -19,7 +19,7 @@ final class ProjectConfig {
   )
   final SdkVersion version;
 
-  Map<String, dynamic> toJson() => _$ProjectConfigToJson(this);
+  Map<String, dynamic> toJson() => _$GlobalConfigToJson(this);
 }
 
 String _toJson(SdkVersion value) => value.toString();

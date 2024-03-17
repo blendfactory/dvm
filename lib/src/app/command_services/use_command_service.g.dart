@@ -8,7 +8,7 @@ part of 'use_command_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$useCommandServiceHash() => r'77c5b8c254a807c85f0f807c54fb0417b6399fec';
+String _$useCommandServiceHash() => r'c49ee29ed4ae742df0105c96628afa1d95c6ca0b';
 
 /// See also [useCommandService].
 @ProviderFor(useCommandService)
@@ -23,6 +23,7 @@ final useCommandServiceProvider =
     sdkServiceProvider,
     consoleServiceProvider,
     projectConfigServiceProvider,
+    globalConfigServiceProvider,
     abiServiceProvider
   },
   allTransitiveDependencies: <ProviderOrFamily>{
@@ -32,6 +33,8 @@ final useCommandServiceProvider =
     ...?consoleServiceProvider.allTransitiveDependencies,
     projectConfigServiceProvider,
     ...?projectConfigServiceProvider.allTransitiveDependencies,
+    globalConfigServiceProvider,
+    ...?globalConfigServiceProvider.allTransitiveDependencies,
     abiServiceProvider,
     ...?abiServiceProvider.allTransitiveDependencies
   },

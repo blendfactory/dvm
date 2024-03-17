@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
+import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:file/file.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

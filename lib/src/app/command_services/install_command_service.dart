@@ -1,9 +1,9 @@
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/abi_service.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
+import 'package:dvmx/src/cores/models/sdk_channel.dart';
+import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:dvmx/src/features/project_config/services/project_config_service.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_channel.dart';
-import 'package:dvmx/src/features/sdk/models/sdk_version.dart';
 import 'package:dvmx/src/features/sdk/services/sdk_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

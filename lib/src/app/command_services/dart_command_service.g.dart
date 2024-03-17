@@ -9,7 +9,7 @@ part of 'dart_command_service.dart';
 // **************************************************************************
 
 String _$dartCommandServiceHash() =>
-    r'044af67d5e32c615d52857c652bd571bd1569759';
+    r'427f70548b3f4f36e32742b3565e490b8c931d25';
 
 /// See also [dartCommandService].
 @ProviderFor(dartCommandService)
@@ -20,14 +20,17 @@ final dartCommandServiceProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$dartCommandServiceHash,
-  dependencies: <ProviderOrFamily>[
+  dependencies: <ProviderOrFamily>{
     projectConfigServiceProvider,
+    globalConfigServiceProvider,
     dartServiceProvider,
     consoleServiceProvider
-  ],
+  },
   allTransitiveDependencies: <ProviderOrFamily>{
     projectConfigServiceProvider,
     ...?projectConfigServiceProvider.allTransitiveDependencies,
+    globalConfigServiceProvider,
+    ...?globalConfigServiceProvider.allTransitiveDependencies,
     dartServiceProvider,
     ...?dartServiceProvider.allTransitiveDependencies,
     consoleServiceProvider,
