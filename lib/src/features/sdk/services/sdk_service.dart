@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:archive/archive_io.dart';
+import 'package:collection/collection.dart';
 import 'package:dvmx/src/cores/local/permission_client.dart';
 import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
 import 'package:dvmx/src/cores/local/system_temp_dir.dart';
@@ -141,6 +142,7 @@ final class SdkService {
         })
         .nonNulls
         .where((version) => channel == null || version.channel == channel)
+        .sortedBy((version) => version)
         .toList();
     return versions;
   }
