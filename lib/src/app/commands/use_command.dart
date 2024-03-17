@@ -75,6 +75,7 @@ final class UseCommand extends AppCommand {
         isLatest: isLatest,
         channel: sdkChannel,
       ),
+      isGlobal: isGlobal,
       throwUsageException: usageException,
     );
   }
