@@ -1,6 +1,6 @@
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
-import 'package:dvmx/src/cores/models/sdk_channel.dart';
+import 'package:dvmx/src/cores/models/channel_option.dart';
 import 'package:dvmx/src/features/sdk/services/sdk_service.dart';
 import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,8 +35,9 @@ final class ListCommandService {
   final ConsoleService _consoleService;
 
   Future<ExitStatus> call({
-    required SdkChannel? channel,
+    required ChannelOption channelOption,
   }) async {
+    final channel = channelOption.toSdkChannelOrNull();
     try {
       final versions = await _sdkService.getInstalledSdks(channel: channel);
       for (final version in versions) {
