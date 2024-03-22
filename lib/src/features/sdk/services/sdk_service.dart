@@ -142,7 +142,7 @@ final class SdkService {
         })
         .nonNulls
         .where((version) => channel == null || version.channel == channel)
-        .sortedBy((version) => version)
+        .sorted()
         .toList();
     return versions;
   }
