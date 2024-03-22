@@ -1,6 +1,7 @@
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
-import 'package:dvmx/src/cores/models/sdk_channel.dart';
+import 'package:dvmx/src/cores/models/channel_option.dart';
+import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:dvmx/src/features/sdk/services/sdk_service.dart';
 import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,10 +36,30 @@ final class ListCommandService {
   final ConsoleService _consoleService;
 
   Future<ExitStatus> call({
-    required SdkChannel? channel,
+    required ChannelOption channelOption,
+    required bool isLatest,
+    required bool isRemote,
   }) async {
+    final channel = channelOption.toSdkChannelOrNull();
     try {
-      final versions = await _sdkService.getInstalledSdks(channel: channel);
+      final List<SdkVersion> versions;
+      if (isRemote) {
+        versions = await _sdkService.getSdks(channel: channel);
+      } else {
+        versions = await _sdkService.getInstalledSdks(channel: channel);
+      }
+
+      if (versions.isEmpty) {
+        _consoleService.warning('No SDKs found.');
+        return ExitStatus.success;
+      }
+
+      if (isLatest) {
+        final latestVersion = versions.last;
+        _consoleService.info(latestVersion.toString());
+        return ExitStatus.success;
+      }
+
       for (final version in versions) {
         _consoleService.info(version.toString());
       }

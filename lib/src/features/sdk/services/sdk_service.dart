@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:archive/archive_io.dart';
+import 'package:collection/collection.dart';
 import 'package:dvmx/src/cores/local/permission_client.dart';
 import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
 import 'package:dvmx/src/cores/local/system_temp_dir.dart';
@@ -57,6 +58,16 @@ final class SdkService {
   final PermissionClient _permissionClient;
 
   Future<List<SdkVersion>> getSdks({
+    required SdkChannel? channel,
+  }) async {
+    final channels = channel == null ? SdkChannel.values : [channel];
+    final versions = await Future.wait(
+      channels.map((channel) => _getSdks(channel: channel)),
+    );
+    return versions.expand((version) => version).sorted();
+  }
+
+  Future<List<SdkVersion>> _getSdks({
     required SdkChannel channel,
   }) async {
     final url = Uri.https(
@@ -141,6 +152,7 @@ final class SdkService {
         })
         .nonNulls
         .where((version) => channel == null || version.channel == channel)
+        .sorted()
         .toList();
     return versions;
   }
