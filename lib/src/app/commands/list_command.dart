@@ -5,6 +5,7 @@ import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/cores/models/channel_option.dart';
 
 const _channelKey = 'channel';
+const _latestKey = 'latest';
 
 final class ListCommand extends AppCommand {
   ListCommand() {
@@ -15,6 +16,11 @@ final class ListCommand extends AppCommand {
       allowed: ChannelOption.options.map((c) => c.value),
       defaultsTo: ChannelOption.stable.value,
     );
+    argParser.addFlag(
+      _latestKey,
+      abbr: 'l',
+      help: 'Display only the latest installed Dart SDK version.',
+      negatable: false,
     );
   }
 
@@ -31,6 +37,8 @@ final class ListCommand extends AppCommand {
   Future<ExitStatus> run() async {
     final channelValue = argResults[_channelKey] as String;
     final channelOption = ChannelOption.byValue(channelValue);
+
+    final isLatest = argResults.wasParsed(_latestKey);
 
     final listCommandService = appContainer.read(listCommandServiceProvider);
 
