@@ -6,6 +6,7 @@ import 'package:dvmx/src/cores/models/channel_option.dart';
 
 const _channelKey = 'channel';
 const _latestKey = 'latest';
+const _remoteKey = 'remote';
 
 final class ListCommand extends AppCommand {
   ListCommand() {
@@ -19,7 +20,13 @@ final class ListCommand extends AppCommand {
     argParser.addFlag(
       _latestKey,
       abbr: 'l',
-      help: 'Display only the latest installed Dart SDK version.',
+      help: 'Display only the latest Dart SDK version.',
+      negatable: false,
+    );
+    argParser.addFlag(
+      _remoteKey,
+      abbr: 'r',
+      help: 'Display the latest Dart SDK version available remotely.',
       negatable: false,
     );
   }
@@ -28,7 +35,8 @@ final class ListCommand extends AppCommand {
   final name = 'list';
 
   @override
-  final description = 'Display the installed Dart SDK versions.';
+  final description = 'Displays the version of Dart SDK installed locally '
+      'or available remotely.';
 
   @override
   List<String> get aliases => ['ls'];
@@ -40,11 +48,14 @@ final class ListCommand extends AppCommand {
 
     final isLatest = argResults.wasParsed(_latestKey);
 
+    final isRemote = argResults.wasParsed(_remoteKey);
+
     final listCommandService = appContainer.read(listCommandServiceProvider);
 
     return listCommandService.call(
       channelOption: channelOption,
       isLatest: isLatest,
+      isRemote: isRemote,
     );
   }
 }
