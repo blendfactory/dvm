@@ -58,6 +58,16 @@ final class SdkService {
   final PermissionClient _permissionClient;
 
   Future<List<SdkVersion>> getSdks({
+    required SdkChannel? channel,
+  }) async {
+    final channels = channel == null ? SdkChannel.values : [channel];
+    final versions = await Future.wait(
+      channels.map((channel) => _getSdks(channel: channel)),
+    );
+    return versions.expand((version) => version).sorted();
+  }
+
+  Future<List<SdkVersion>> _getSdks({
     required SdkChannel channel,
   }) async {
     final url = Uri.https(
