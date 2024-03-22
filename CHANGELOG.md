@@ -1,3 +1,29 @@
+## 0.0.6
+
+### Improved
+
+- Change `dvm list` to display a message as a warning instead of an error when the SDKs are not found.
+
+### Fixed
+
+- Sort and display installed Dart SDKs in ascending order.
+
+### Added
+
+- Add `--global` option flag to `dvm use`.
+  - `dvm use --global <version>`
+- When executing `dvm dart`, if the project config are not found, the Dart SDK version from the global config will be used.
+- Add `--latest` option flag to `dvm list`.
+  - `dvm list --latest`
+- Add `--remote` option flag to `dvm list`.
+  - `dvm list --remote`
+
+### Changed
+
+- Change the alias of `dvm list` from `l` to `ls`.
+- Change default channel for `dvm list` to stable.
+- Remove `dvm releases` command.
+
 ## 0.0.5
 
 ### Fixed
