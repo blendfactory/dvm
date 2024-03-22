@@ -42,6 +42,9 @@ final class ListCommand extends AppCommand {
 
     final listCommandService = appContainer.read(listCommandServiceProvider);
 
-    return listCommandService.call(channelOption: channelOption);
+    return listCommandService.call(
+      channelOption: channelOption,
+      isLatest: isLatest,
+    );
   }
 }

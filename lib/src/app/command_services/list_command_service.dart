@@ -36,12 +36,19 @@ final class ListCommandService {
 
   Future<ExitStatus> call({
     required ChannelOption channelOption,
+    required bool isLatest,
   }) async {
     final channel = channelOption.toSdkChannelOrNull();
     try {
       final versions = await _sdkService.getInstalledSdks(channel: channel);
       if (versions.isEmpty) {
         _consoleService.warning('No SDKs installed.');
+        return ExitStatus.success;
+      }
+
+      if (isLatest) {
+        final latestVersion = versions.last;
+        _consoleService.info(latestVersion.toString());
         return ExitStatus.success;
       }
 
