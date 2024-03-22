@@ -39,13 +39,18 @@ final class ReleasesCommandService {
     required bool isLatest,
   }) async {
     try {
-      if (isLatest) {
-        final version = await _sdkService.getLatestSdk(channel: channel);
-        _consoleService.info(version.toString());
+      final versions = await _sdkService.getSdks(channel: channel);
+      if (versions.isEmpty) {
+        _consoleService.warning('No SDKs found.');
         return ExitStatus.success;
       }
 
-      final versions = await _sdkService.getSdks(channel: channel);
+      if (isLatest) {
+        final latestVersion = versions.last;
+        _consoleService.info(latestVersion.toString());
+        return ExitStatus.success;
+      }
+
       for (final version in versions) {
         _consoleService.info(version.toString());
       }
