@@ -40,6 +40,11 @@ final class ListCommandService {
     final channel = channelOption.toSdkChannelOrNull();
     try {
       final versions = await _sdkService.getInstalledSdks(channel: channel);
+      if (versions.isEmpty) {
+        _consoleService.warning('No SDKs installed.');
+        return ExitStatus.success;
+      }
+
       for (final version in versions) {
         _consoleService.info(version.toString());
       }
