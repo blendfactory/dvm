@@ -9,7 +9,7 @@ part of 'doctor_command_service.dart';
 // **************************************************************************
 
 String _$doctorCommandServiceHash() =>
-    r'4e6af126b44035b850cb079ab0619357505c127b';
+    r'e0d2cea6a65a6a81d85ada035f15125f1e4642b7';
 
 /// See also [doctorCommandService].
 @ProviderFor(doctorCommandService)
@@ -21,16 +21,19 @@ final doctorCommandServiceProvider =
       ? null
       : _$doctorCommandServiceHash,
   dependencies: <ProviderOrFamily>{
-    sdkServiceProvider,
     consoleServiceProvider,
+    packageServiceProvider,
+    sdkServiceProvider,
     projectConfigServiceProvider,
     globalConfigServiceProvider
   },
   allTransitiveDependencies: <ProviderOrFamily>{
-    sdkServiceProvider,
-    ...?sdkServiceProvider.allTransitiveDependencies,
     consoleServiceProvider,
     ...?consoleServiceProvider.allTransitiveDependencies,
+    packageServiceProvider,
+    ...?packageServiceProvider.allTransitiveDependencies,
+    sdkServiceProvider,
+    ...?sdkServiceProvider.allTransitiveDependencies,
     projectConfigServiceProvider,
     ...?projectConfigServiceProvider.allTransitiveDependencies,
     globalConfigServiceProvider,
