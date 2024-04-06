@@ -4,6 +4,7 @@ import 'package:dvmx/src/cores/local/project_root_dir.dart';
 import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
 import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:dvmx/src/features/project_config/models/project_config.dart';
+import 'package:dvmx/src/features/project_config/models/project_config_status.dart';
 import 'package:file/file.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -93,5 +94,25 @@ final class ProjectConfigService {
     }
     final ignoreFileContent = '${sdkLink.basename}\n';
     ignoreFile.writeAsStringSync(ignoreFileContent);
+  }
+
+  ProjectConfigStatus checkProjectConfig() {
+    final projectConfigFile = _projectConfigDir.childFile('config.json');
+    if (!projectConfigFile.existsSync()) {
+      return ProjectConfigStatus.notFound();
+    }
+
+    try {
+      final fileContent = projectConfigFile.readAsStringSync();
+      final json = jsonDecode(fileContent) as Map<String, dynamic>;
+      final projectConfig = ProjectConfig.fromJson(json);
+      return ProjectConfigStatus.found(projectConfig);
+    } on FormatException catch (e) {
+      return ProjectConfigStatus.jsonFormatError(e);
+    } on CheckedFromJsonException catch (e) {
+      return ProjectConfigStatus.paramFormatError(e);
+    } on Exception catch (e) {
+      return ProjectConfigStatus.unknownError(e);
+    }
   }
 }
