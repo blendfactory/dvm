@@ -57,7 +57,7 @@ final class PackageVersionService {
     return Version.parse(version);
   }
 
-  Future<PackageVersionStatus> checkVersion() async {
+  Future<PackageVersionStatus> checkPackageVersion() async {
     final Version current;
     final Version latest;
     try {
