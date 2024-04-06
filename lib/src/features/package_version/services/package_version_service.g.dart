@@ -2,29 +2,34 @@
 
 // ignore_for_file: type=lint, duplicate_ignore
 
-part of 'package_service.dart';
+part of 'package_version_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$packageServiceHash() => r'5efdfb45a0bab7b57891ed0cd436955a7cac7bdc';
+String _$packageVersionServiceHash() =>
+    r'3803090c83761b5e3f1bbff18b048fa9ca449c44';
 
-/// See also [packageService].
-@ProviderFor(packageService)
-final packageServiceProvider = AutoDisposeProvider<PackageService>.internal(
-  packageService,
-  name: r'packageServiceProvider',
+/// See also [packageVersionService].
+@ProviderFor(packageVersionService)
+final packageVersionServiceProvider =
+    AutoDisposeProvider<PackageVersionService>.internal(
+  packageVersionService,
+  name: r'packageVersionServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$packageServiceHash,
-  dependencies: <ProviderOrFamily>[dvmClientProvider],
+      : _$packageVersionServiceHash,
+  dependencies: <ProviderOrFamily>[cliInfoProvider, dvmClientProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
+    cliInfoProvider,
+    ...?cliInfoProvider.allTransitiveDependencies,
     dvmClientProvider,
     ...?dvmClientProvider.allTransitiveDependencies
   },
 );
 
-typedef PackageServiceRef = AutoDisposeProviderRef<PackageService>;
+typedef PackageVersionServiceRef
+    = AutoDisposeProviderRef<PackageVersionService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
