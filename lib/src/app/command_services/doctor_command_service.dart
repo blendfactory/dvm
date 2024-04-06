@@ -47,6 +47,13 @@ final class DoctorCommandService {
   final ProjectConfigService _projectConfigService;
 
   Future<ExitStatus> call() async {
+    final progress = _consoleService.progress('Checking...');
+    final packageVersionStatus =
+        await _packageVersionService.checkPackageVersion();
+    final globalConfigStatus = _globalConfigService.checkGlobalConfig();
+    final projectConfigStatus = _projectConfigService.checkProjectConfig();
+    progress.complete('Check completed.');
+
     return ExitStatus.success;
   }
 }
