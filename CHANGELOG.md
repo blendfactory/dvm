@@ -1,3 +1,10 @@
+## 0.0.7
+
+### Added
+
+- Create a command for displaying info about dvm configuration.
+  - `dvm doctor`
+
 ## 0.0.6
 
 ### Improved
