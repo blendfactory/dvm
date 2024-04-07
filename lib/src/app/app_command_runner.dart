@@ -7,9 +7,10 @@ import 'package:dvmx/src/app/commands/install_command.dart';
 import 'package:dvmx/src/app/commands/list_command.dart';
 import 'package:dvmx/src/app/commands/uninstall_command.dart';
 import 'package:dvmx/src/app/commands/use_command.dart';
-import 'package:dvmx/src/app/gen/cli_info.dart';
+import 'package:dvmx/src/app/gen/cli_info.dart' as gen;
 import 'package:dvmx/src/app/models/exit_status.dart';
 import 'package:dvmx/src/app/servicies/console_service.dart';
+import 'package:dvmx/src/cores/local/cli_info.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 /// A command runner for the DVM.
@@ -17,8 +18,8 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
   /// Creates a new instance of [AppCommandRunner].
   AppCommandRunner()
       : super(
-          cliInfo.name,
-          cliInfo.description,
+          gen.cliInfo.name,
+          gen.cliInfo.description,
         ) {
     argParser.addFlag(
       'version',
@@ -58,6 +59,7 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
                 level: Level.verbose,
               ),
             ),
+            cliInfoProvider.overrideWithValue(gen.cliInfo),
           ],
         );
       }
@@ -72,7 +74,7 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
   }
 
   void _printCliVersion() {
-    _consoleService.info(cliInfo.version);
+    _consoleService.info(gen.cliInfo.version);
   }
 
   void _printUsageException(UsageException e) {
