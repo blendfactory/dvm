@@ -49,12 +49,12 @@ final class PackageVersionStatusAheadOfLatestError
   final Version latest;
 }
 
-final class PackageVersionStatusFormatError extends PackageVersionStatusError {
-  const PackageVersionStatusFormatError(FormatException super.e);
-}
-
 final class PackageVersionStatusNetworkError extends PackageVersionStatusError {
   const PackageVersionStatusNetworkError(ClientException super.e);
+}
+
+final class PackageVersionStatusFormatError extends PackageVersionStatusError {
+  const PackageVersionStatusFormatError(FormatException super.e);
 }
 
 final class PackageVersionStatusUnknownError extends PackageVersionStatusError {

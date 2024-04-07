@@ -63,10 +63,10 @@ final class PackageVersionService {
     try {
       current = getCurrentVersion();
       latest = await getLatestVersion();
-    } on FormatException catch (e) {
-      return PackageVersionStatus.formatError(e);
     } on ClientException catch (e) {
       return PackageVersionStatus.networkError(e);
+    } on FormatException catch (e) {
+      return PackageVersionStatus.formatError(e);
     } on Exception catch (e) {
       return PackageVersionStatus.unknownError(e);
     }
