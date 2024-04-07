@@ -9,8 +9,10 @@ sealed class PackageVersionStatus {
     required Version latest,
   }) = PackageVersionStatusOutdated;
 
-  const factory PackageVersionStatus.aheadOfLatestError() =
-      PackageVersionStatusAheadOfLatestError;
+  const factory PackageVersionStatus.aheadOfLatestError({
+    required Version current,
+    required Version latest,
+  }) = PackageVersionStatusAheadOfLatestError;
   const factory PackageVersionStatus.formatError(FormatException e) =
       PackageVersionStatusFormatError;
   const factory PackageVersionStatus.networkError(ClientException e) =
@@ -39,7 +41,12 @@ sealed class PackageVersionStatusError extends PackageVersionStatus {
 
 final class PackageVersionStatusAheadOfLatestError
     extends PackageVersionStatusError {
-  const PackageVersionStatusAheadOfLatestError() : super(null);
+  const PackageVersionStatusAheadOfLatestError({
+    required this.current,
+    required this.latest,
+  }) : super(null);
+  final Version current;
+  final Version latest;
 }
 
 final class PackageVersionStatusFormatError extends PackageVersionStatusError {

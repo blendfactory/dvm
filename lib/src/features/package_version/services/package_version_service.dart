@@ -72,7 +72,10 @@ final class PackageVersionService {
     }
 
     if (current > latest) {
-      return const PackageVersionStatus.aheadOfLatestError();
+      return PackageVersionStatus.aheadOfLatestError(
+        current: current,
+        latest: latest,
+      );
     }
 
     if (current == latest) {
