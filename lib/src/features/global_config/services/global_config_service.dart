@@ -4,6 +4,7 @@ import 'package:dvmx/src/cores/local/global_root_dir.dart';
 import 'package:dvmx/src/cores/local/sdk_cache_dir.dart';
 import 'package:dvmx/src/cores/models/sdk_version.dart';
 import 'package:dvmx/src/features/global_config/models/global_config.dart';
+import 'package:dvmx/src/features/global_config/models/global_config_status.dart';
 import 'package:file/file.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -86,5 +87,25 @@ final class GlobalConfigService {
     const prettyEncoder = JsonEncoder.withIndent('  ');
     final globalConfigContent = prettyEncoder.convert(globalConfig.toJson());
     globalConfigFile.writeAsStringSync('$globalConfigContent\n');
+  }
+
+  GlobalConfigStatus checkGlobalConfig() {
+    final globalConfigFile = _globalConfigDir.childFile('config.json');
+    if (!globalConfigFile.existsSync()) {
+      return GlobalConfigStatus.notFound();
+    }
+
+    try {
+      final fileContent = globalConfigFile.readAsStringSync();
+      final json = jsonDecode(fileContent) as Map<String, dynamic>;
+      final globalConfig = GlobalConfig.fromJson(json);
+      return GlobalConfigStatus.found(globalConfig);
+    } on FormatException catch (e) {
+      return GlobalConfigStatus.jsonFormatError(e);
+    } on CheckedFromJsonException catch (e) {
+      return GlobalConfigStatus.paramFormatError(e);
+    } on Exception catch (e) {
+      return GlobalConfigStatus.unknownError(e);
+    }
   }
 }

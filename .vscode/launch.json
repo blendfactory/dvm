@@ -5,7 +5,7 @@
       "type": "pickString",
       "id": "commands",
       "description": "Select a command to run",
-      "options": ["--version", "list", "install", "use", "dart"]
+      "options": ["--version", "list", "install", "use", "dart", "doctor"]
     },
     {
       "type": "promptString",

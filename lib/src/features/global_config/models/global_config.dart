@@ -20,6 +20,11 @@ final class GlobalConfig {
   final SdkVersion version;
 
   Map<String, dynamic> toJson() => _$GlobalConfigToJson(this);
+
+  @override
+  String toString() {
+    return 'dartSdkVersion: $version';
+  }
 }
 
 String _toJson(SdkVersion value) => value.toString();
