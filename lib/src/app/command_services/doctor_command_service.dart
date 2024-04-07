@@ -67,6 +67,17 @@ final class DoctorCommandService {
     ];
     checkResults.forEach(_consoleService.checkResult);
 
+    _consoleService.spacer();
+    final issueCount = checkResults
+        .where(
+          (r) => r.status != CheckStatus.success,
+        )
+        .length;
+    final issueCountMessage =
+        issueCount == 0 ? 'No issues found!' : 'Found $issueCount issue(s).';
+    _consoleService.info(issueCountMessage);
+    _consoleService.spacer();
+
     return ExitStatus.success;
   }
 }
