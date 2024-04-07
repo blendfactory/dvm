@@ -58,6 +58,15 @@ final class DoctorCommandService {
     final projectConfigStatus = _projectConfigService.checkProjectConfig();
     progress.complete('Check completed.');
 
+    _consoleService.spacer();
+    _consoleService.info('Doctor summary:');
+    final checkResults = [
+      packageVersionStatus.toCheckResult(),
+      globalConfigStatus.toCheckResult(),
+      projectConfigStatus.toCheckResult(),
+    ];
+    checkResults.forEach(_consoleService.checkResult);
+
     return ExitStatus.success;
   }
 }
