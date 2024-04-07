@@ -20,6 +20,11 @@ final class ProjectConfig {
   final SdkVersion version;
 
   Map<String, dynamic> toJson() => _$ProjectConfigToJson(this);
+
+  @override
+  String toString() {
+    return 'dartSdkVersion: $version';
+  }
 }
 
 String _toJson(SdkVersion value) => value.toString();
