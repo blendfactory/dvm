@@ -44,15 +44,15 @@ final class PackageVersionService {
     final responseBody = await _dvmClient.read(url);
     final jsonObject = jsonDecode(responseBody) as Map<String, dynamic>?;
     if (jsonObject == null) {
-      throw ClientException('Failed to convert response body to json object.');
+      throw FormatException('Failed to convert response body to json object.');
     }
     final latestObject = jsonObject['latest'] as Map<String, dynamic>?;
     if (latestObject == null) {
-      throw ClientException('Failed to convert json object to latest object.');
+      throw FormatException('Failed to convert json object to latest object.');
     }
     final version = latestObject['version'] as String?;
     if (version == null) {
-      throw ClientException('Failed to convert latest object to version.');
+      throw FormatException('Failed to convert latest object to version.');
     }
     return Version.parse(version);
   }
