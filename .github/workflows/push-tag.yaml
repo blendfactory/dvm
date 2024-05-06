@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate App Token
-        uses: actions/create-github-app-token@6c406e8a244fdf6bbf79e6cc8a91504a48d2c2ce # v1.9.2
+        uses: actions/create-github-app-token@a0de6af83968303c8c955486bf9739a57d23c7f1 # v1.10.0
         id: app-token
         with:
           app-id: ${{ secrets.APP_ID_BLENDFACTORY_TAG_PUSHER }}
