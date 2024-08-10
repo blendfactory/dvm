@@ -9,6 +9,7 @@ const _githubRepo = 'blendfactory/dvm';
 
 Future<void> main(List<String> args) async {
   if (args.firstOrNull == 'pkg-version') {
+    // ignore: avoid_print
     print(cliInfo.version);
     return;
   }

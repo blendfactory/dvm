@@ -92,7 +92,7 @@ final class GlobalConfigService {
   GlobalConfigStatus checkGlobalConfig() {
     final globalConfigFile = _globalConfigDir.childFile('config.json');
     if (!globalConfigFile.existsSync()) {
-      return GlobalConfigStatus.notFound();
+      return const GlobalConfigStatus.notFound();
     }
 
     try {
