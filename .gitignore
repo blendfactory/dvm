@@ -3,6 +3,7 @@
 .dart_tool/
 .idea/
 *.log
+pubspec.lock
 
 # DVM related
 .development/*
