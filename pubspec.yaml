@@ -15,7 +15,7 @@ dependencies:
   cli_info: ^1.0.0
   collection: ^1.18.0
   file: ^7.0.0
-  http: ^1.2.1
+  http: ^1.2.2
   json_annotation: ^4.8.1
   mason_logger: ^0.2.12
   meta: ^1.12.0
