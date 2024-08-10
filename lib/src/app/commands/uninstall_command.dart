@@ -35,7 +35,7 @@ final class UninstallCommand extends AppCommand {
     final uninstallCommandService =
         appContainer.read(uninstallCommandServiceProvider);
 
-    final isAll = argResults.wasParsed(_allFlagKey);
+    final isAll = argResults.flag(_allFlagKey);
     if (isAll) {
       return uninstallCommandService.call(isAll: true);
     }
