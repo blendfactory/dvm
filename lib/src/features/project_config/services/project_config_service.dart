@@ -99,7 +99,7 @@ final class ProjectConfigService {
   ProjectConfigStatus checkProjectConfig() {
     final projectConfigFile = _projectConfigDir.childFile('config.json');
     if (!projectConfigFile.existsSync()) {
-      return ProjectConfigStatus.notFound();
+      return const ProjectConfigStatus.notFound();
     }
 
     try {

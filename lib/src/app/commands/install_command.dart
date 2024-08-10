@@ -54,9 +54,9 @@ final class InstallCommand extends AppCommand {
       }
     }
 
-    final channel = argResults[_channelKey] as String;
+    final channel = argResults.option(_channelKey)!;
     final sdkChannel = SdkChannel.values.byName(channel);
-    final isLatest = argResults.wasParsed(_latestKey);
+    final isLatest = argResults.flag(_latestKey);
 
     final installCommandService =
         appContainer.read(installCommandServiceProvider);

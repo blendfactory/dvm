@@ -93,7 +93,7 @@ final class AppCommandRunner extends CommandRunner<ExitStatus> {
 }
 
 extension _ExistsFlag on ArgResults {
-  bool get existsVersionFlag => wasParsed('version');
+  bool get existsVersionFlag => flag('version');
 
-  bool get existsVerboseFlag => wasParsed('verbose');
+  bool get existsVerboseFlag => flag('verbose');
 }

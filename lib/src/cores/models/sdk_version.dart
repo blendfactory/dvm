@@ -74,13 +74,13 @@ sealed class SdkVersion implements Comparable<SdkVersion> {
     }
   }
 
-  factory SdkVersion.stable({
+  const factory SdkVersion.stable({
     required int major,
     required int minor,
     required int patch,
   }) = _StableSdkVersion;
 
-  factory SdkVersion.beta({
+  const factory SdkVersion.beta({
     required int major,
     required int minor,
     required int patch,
@@ -88,7 +88,7 @@ sealed class SdkVersion implements Comparable<SdkVersion> {
     required int prePatch,
   }) = _BetaSdkVersion;
 
-  factory SdkVersion.dev({
+  const factory SdkVersion.dev({
     required int major,
     required int minor,
     required int patch,
