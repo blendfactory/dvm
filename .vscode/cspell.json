@@ -1,0 +1,14 @@
+{
+    "words": [
+        "Archs",
+        "blendfactory",
+        "dartaotruntime",
+        "dvmx",
+        "riverpod",
+        "yumemi"
+    ],
+    "ignorePaths": [
+        "**.lock",
+        "**.g.dart"
+    ]
+}
