@@ -1,3 +1,9 @@
+## 0.0.8+1
+
+### Improved
+
+- Add the installation section to the README.
+
 ## 0.0.8
 
 ### Changed
