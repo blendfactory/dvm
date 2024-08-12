@@ -8,6 +8,26 @@ Inspired by [FVM].
 
 For those interested in the evolution process of DVM, please visit the [GitHub Project].
 
+## Installation
+
+### Homebrew (Recommended)
+
+> [!NOTE]
+> This is recommended since it does not depend on the version of Dart SDK, pub packages, etc.
+
+```shell
+brew install blendfactory/tap/dvm
+```
+
+### Pub (Not Recommended)
+
+> [!NOTE]
+> Requires Dart SDK version 3.5.0 or higher.
+
+```shell
+dart pub global activate dvm --overwrite
+```
+
 ## GitHub Actions
 
 See [dvm-config-action].
