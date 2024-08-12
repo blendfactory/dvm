@@ -7,7 +7,7 @@ executables:
   dvm: dvm
 
 environment:
-  sdk: ^3.3.0
+  sdk: ^3.5.0
 
 dependencies:
   archive: ^3.6.1
