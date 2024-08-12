@@ -189,7 +189,7 @@ final class SdkService {
     final responseBodyBytes = await _dvmClient.readBytes(url);
 
     final archive = _zipDecoder.decodeBytes(responseBodyBytes);
-    extractArchiveToDisk(archive, _systemTempDir.path);
+    await extractArchiveToDisk(archive, _systemTempDir.path);
 
     final sdkDir = _systemTempDir.childDirectory('dart-sdk');
     if (!sdkDir.existsSync()) {

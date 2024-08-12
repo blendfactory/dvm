@@ -43,12 +43,12 @@ final class ListCommand extends AppCommand {
 
   @override
   Future<ExitStatus> run() async {
-    final channelValue = argResults[_channelKey] as String;
+    final channelValue = argResults.option(_channelKey)!;
     final channelOption = ChannelOption.byValue(channelValue);
 
-    final isLatest = argResults.wasParsed(_latestKey);
+    final isLatest = argResults.flag(_latestKey);
 
-    final isRemote = argResults.wasParsed(_remoteKey);
+    final isRemote = argResults.flag(_remoteKey);
 
     final listCommandService = appContainer.read(listCommandServiceProvider);
 
