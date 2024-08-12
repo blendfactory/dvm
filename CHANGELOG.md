@@ -1,3 +1,13 @@
+## 0.0.8
+
+### Changed
+
+- Requires Dart SDK 3.5.0 or higher.
+
+### Fixed
+
+- Fix the error when running `dvm install` command.
+
 ## 0.0.7
 
 ### Added
