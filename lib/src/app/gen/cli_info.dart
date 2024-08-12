@@ -8,5 +8,5 @@ const cliInfo = CliInfo(
   name: 'dvm',
   description:
       '''Dart Version Management: A simple CLI to manage Dart SDK versions per project.''',
-  version: '0.0.7',
+  version: '0.0.8',
 );
